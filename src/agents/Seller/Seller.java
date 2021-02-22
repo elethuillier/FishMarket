@@ -1,4 +1,4 @@
-package agents;
+package agents.Seller;
 
 import jade.core.Agent;
 
