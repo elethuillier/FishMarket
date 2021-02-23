@@ -10,6 +10,9 @@ public class Performatives {
     public static final int to_bid = ACLMessage.PROPOSE;
     public static final int to_pay = ACLMessage.CONFIRM;
 
-    public static final int to_publish = ACLMessage.PROPAGATE;
+    private static final int CREATE = 100;
+    public static final int to_publish = CREATE;
     public static final int to_subscribe = ACLMessage.SUBSCRIBE;
+
+    public static final int to_propagate = ACLMessage.PROPAGATE;
 }

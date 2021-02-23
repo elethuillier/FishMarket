@@ -1,29 +1,30 @@
 package shared;
 
-import agents.Seller.Seller;
 import jade.core.AID;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+
+import java.util.Set;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Stack;
 
 public class Auction implements Serializable {
-    private final Seller seller;
+    private final AID seller;
     private final Pack pack;
     private final double rising_step;
     private final double falling_step;
     private final int cooldown; // ms
-    private final int id;
 
-    private List<AID> subscribers = new ArrayList<>();
-    private List<AID> offerers = new Stack<>();
+    private final Set<AID> subscribers = new HashSet<>();
+    private final Stack<AID> offerers = new Stack<>();
 
     private double current_price;
     private boolean done = false;
 
-    public Auction(Pack pack, Seller seller, double rising_step, double falling_step, int cooldown) {
+    private final int id;
+
+    public Auction(Pack pack, AID seller, double rising_step, double falling_step, int cooldown) {
         this.pack = pack;
         this.seller = seller;
         current_price = pack.getStartPrice();
@@ -33,29 +34,31 @@ public class Auction implements Serializable {
         this.id = hashCode();
     }
 
-    public Seller getSeller() {
+    public AID getSeller() {
         return seller;
     }
 
-    public List<AID> getOfferers() {
+    public Stack<AID> getOfferers() {
         return offerers;
     }
 
-    public List<AID> getSubscribers() {
+    public Set<AID> getSubscribers() {
         return subscribers;
-    }
-
-    public double getCurrentPrice() {
-        return current_price;
-    }
-
-    public void setCurrentPrice(double current_price) {
-        this.current_price = current_price;
     }
 
     public int getId() {
         return id;
     }
+
+    public Pack getPack() { return pack; }
+
+
+
+    public void setCurrentPrice(double current_price) {
+        this.current_price = current_price;
+    }
+
+    public void setDone(boolean done) { this.done = done; }
 
     @Override
     public boolean equals(Object o) {
