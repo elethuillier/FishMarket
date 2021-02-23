@@ -1,6 +1,8 @@
 package shared.messages;
 
-public class AnnounceMessage {
+import java.io.Serializable;
+
+public class AnnounceMessage implements Serializable {
     private final int auction_id;
     private final double price;
 

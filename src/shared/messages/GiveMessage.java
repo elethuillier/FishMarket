@@ -2,10 +2,10 @@ package shared.messages;
 
 import java.io.Serializable;
 
-public class SubscribeMessage implements Serializable {
+public class GiveMessage implements Serializable {
     private final int auction_id;
 
-    public SubscribeMessage(int auction_id) {
+    public GiveMessage(int auction_id) {
         this.auction_id = auction_id;
     }
 

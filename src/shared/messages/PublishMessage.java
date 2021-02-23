@@ -1,15 +1,35 @@
 package shared.messages;
 
-import shared.Auction;
+import shared.Pack;
 
-public class PublishMessage {
-    private final Auction auction;
+import java.io.Serializable;
 
-    public PublishMessage(Auction auction) {
-        this.auction = auction;
+public class PublishMessage implements Serializable {
+    private final Pack pack;
+    private final double rising_step;
+    private final double falling_step;
+    private final int cooldown;
+
+    public PublishMessage(Pack pack, double rising_step, double falling_step, int cooldown) {
+        this.pack = pack;
+        this.rising_step = rising_step;
+        this.falling_step = falling_step;
+        this.cooldown = cooldown;
     }
 
-    public Auction getAuction() {
-        return auction;
+    public Pack getPack() {
+        return pack;
+    }
+
+    public double getRisingStep() {
+        return rising_step;
+    }
+
+    public double getFallingStep() {
+        return falling_step;
+    }
+
+    public int getCooldown() {
+        return cooldown;
     }
 }
