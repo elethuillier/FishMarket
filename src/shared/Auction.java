@@ -1,6 +1,6 @@
 package shared;
 
-import agents.Seller;
+import agents.Seller.Seller;
 import jade.core.AID;
 
 import java.io.Serializable;
