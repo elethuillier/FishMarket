@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jade.core.Agent;
+import shared.Auction;
 
 
 public class Seller extends Agent {
     private List<String[]> PropositionsRecues = new ArrayList<>();
-    private List<Offre> OffresEnvoyees = new ArrayList<>();
+    private List<Auction> OffresEnvoyees = new ArrayList<>();
 	@Override
     protected void setup() {
         System.out.println("L'agent "+getAID().getName()+ " est prêt.");
