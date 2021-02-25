@@ -9,9 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Market extends Agent {
-    public final List<Auction> auctions = new ArrayList<>();
-    @Override
-    protected void setup() {
-        super.setup();
-    }
+	public final List<Auction> auctions = new ArrayList<>();
+
+	@Override
+	protected void setup() {
+		super.setup();
+	}
 }
