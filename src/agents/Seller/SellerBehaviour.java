@@ -6,7 +6,7 @@ import jade.core.behaviours.OneShotBehaviour;
 import jade.core.behaviours.WakerBehaviour;
 
 public class SellerBehaviour extends Agent {
-	private final Seller seller;
+	// private final Seller seller;
 	// publishmessage
 
 	// To_Announce
@@ -14,18 +14,18 @@ public class SellerBehaviour extends Agent {
 		FSMBehaviour fsm = new FSMBehaviour(this) {
 			public int onEnd() {
 				System.out.println("FSM behaviour terminé");
-				seller.doDelete();
+				// seller.doDelete();
 				return super.onEnd();
 			}
 		};
 
 		// Definition des etats
 		fsm.registerFirstState(new annonce(), "1");
-		fsm.registerState(new attenteOffre1(), "2");
-		fsm.registerState(new attenteOffre2(), "3");
-		fsm.registerState(new reponseOffre(), "4");
-		fsm.registerState(new attribuerPack(), "5");
-		fsm.registerState(new attentePaiement(), "6");
+		// fsm.registerState(new attenteOffre1(), "2");
+		// fsm.registerState(new attenteOffre2(), "3");
+		// fsm.registerState(new reponseOffre(), "4");
+		// fsm.registerState(new attribuerPack(), "5");
+		// fsm.registerState(new attentePaiement(), "6");
 
 		// definition des transactions
 		
@@ -51,10 +51,10 @@ public class SellerBehaviour extends Agent {
 			System.out.println("Boolean : " + recu);
 
 			//Timer d'attente pour reception d'un message "5s"
-			addBehaviour(new WWakerBehaviour(this, 5000) {
+			/* addBehaviour(new WWakerBehaviour(this, 5000) {
 				@Override
 				protected void handleElapsedTimeout()
-			});
+			}); */
 			
 			if (recu) {
 				System.out.println("return 2 pour passe à l'etat 2");
