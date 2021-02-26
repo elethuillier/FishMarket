@@ -5,16 +5,12 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class AuctionElement {
+public class AuctionMarketElement {
     private final StringProperty seller;
     private final StringProperty pack;
     private final DoubleProperty price;
 
-    public AuctionElement(){
-        this(null, null, null);
-    }
-
-    public AuctionElement(String seller, String pack, Double price) {
+    public AuctionMarketElement(String seller, String pack, Double price) {
         this.seller = new SimpleStringProperty(seller);
         this.pack = new SimpleStringProperty(pack);
         this.price = new SimpleDoubleProperty(price);

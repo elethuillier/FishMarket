@@ -10,31 +10,33 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import model.AuctionElement;
+import model.AuctionMarketElement;
+import shared.EnvConfiguration;
 
 import java.io.IOException;
 
 public class MarketApplication extends Application {
     public static MarketApplication self;
-    private final ObservableList<AuctionElement> observable_auctions = FXCollections.observableArrayList();
-    private final String fxml_url = "../view/market.fxml";
+    private static String agent_name;
+    private final ObservableList<AuctionMarketElement> observable_auctions = FXCollections.observableArrayList();
 
     @FXML
     private AnchorPane root;
 
     public MarketApplication() {
         self = this;
-        Boot.main(new String[]{"-gui", "FishMarket:agents.market.Market()"});
+        Boot.main(new String[]{"-local-port", EnvConfiguration.default_port, "-gui", agent_name + ":agents.market.Market()"});
     }
 
     public static void main(String[] args) {
+        if(args.length > 0 && !args[0].isEmpty()) agent_name = args[0];
         launch(args);
     }
 
     @Override
     public void start(Stage primaryStage) {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource(fxml_url));
+        loader.setLocation(getClass().getResource("../view/market.fxml"));
         addTestData();
         try {
             root = loader.load();
@@ -50,11 +52,11 @@ public class MarketApplication extends Application {
 
     private void addTestData() {
         for(int i=0; i<5; i++) {
-            observable_auctions.add(new AuctionElement("seller", "daurade", (double) i));
+            observable_auctions.add(new AuctionMarketElement("seller", "daurade", (double) i));
         }
     }
 
-    public ObservableList<AuctionElement> getObservableAuctions() {
+    public ObservableList<AuctionMarketElement> getObservableAuctions() {
         return observable_auctions;
     }
 }

@@ -6,17 +6,17 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
-import model.AuctionElement;
+import model.AuctionMarketElement;
 
 public class MarketController {
     @FXML
-    private TableColumn<AuctionElement, String> sellers;
+    private TableColumn<AuctionMarketElement, String> sellers;
     @FXML
-    private TableColumn<AuctionElement, String> packs;
+    private TableColumn<AuctionMarketElement, String> packs;
     @FXML
-    private TableColumn<AuctionElement, Number> prices;
+    private TableColumn<AuctionMarketElement, Number> prices;
     @FXML
-    private TableView<AuctionElement> auctions;
+    private TableView<AuctionMarketElement> auctions;
     @FXML
     private AnchorPane root;
 
