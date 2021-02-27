@@ -12,6 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.AuctionMarketElement;
 import shared.EnvConfiguration;
+import shared.Pack;
 
 import java.io.IOException;
 
@@ -52,7 +53,7 @@ public class MarketApplication extends Application {
 
     private void addTestData() {
         for(int i=0; i<5; i++) {
-            observable_auctions.add(new AuctionMarketElement("seller", "daurade", (double) i));
+            observable_auctions.add(new AuctionMarketElement("seller", new Pack(10, "daurade"), (double) i));
         }
     }
 

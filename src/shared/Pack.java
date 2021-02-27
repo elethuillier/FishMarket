@@ -17,4 +17,8 @@ public class Pack {
     public double getStartPrice() {
         return start_price;
     }
+
+    public String getDescription() {
+        return description;
+    }
 }
