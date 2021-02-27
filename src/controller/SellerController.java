@@ -49,7 +49,15 @@ public class SellerController {
         auctions.setItems(app.getObservableAuctions());
     }
 
-    public void setButtonListener(Consumer<PublishMessage> callback) {
+    public void setStateLabel(String state) {
+        this.state_label.setText(state);
+    }
+
+    public void setPackLabel(Pack pack) {
+        this.pack_label.setText(pack.getDescription());
+    }
+
+    public void setCreateListener(Consumer<PublishMessage> callback) {
         button_create.setOnMouseClicked(event -> {
             String[] numeric_inputs = {initial_price.getText(), cooldown.getText(), rising_step.getText(), falling_step.getText()};
             if(!name.getText().isEmpty() && shared.Utils.areNumeric(numeric_inputs)) {
@@ -63,5 +71,4 @@ public class SellerController {
             }
         });
     }
-
 }

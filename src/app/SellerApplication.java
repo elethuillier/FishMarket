@@ -12,6 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.AuctionSellerElement;
 import shared.EnvConfiguration;
+import shared.Pack;
 
 import java.io.IOException;
 
@@ -58,7 +59,7 @@ public class SellerApplication extends Application {
 
     private void addTestData() {
         for(int i=0; i<5; i++) {
-            observable_auctions.add(new AuctionSellerElement("huitre", i, "jean-rémi"));
+            observable_auctions.add(new AuctionSellerElement(new Pack(10,"huitre"), i, "jean-rémi"));
         }
     }
 }
