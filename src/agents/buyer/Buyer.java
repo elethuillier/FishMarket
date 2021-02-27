@@ -7,11 +7,18 @@ import jade.core.behaviours.FSMBehaviour;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 import shared.Performatives;
+import shared.messages.AnnounceMessage;
 
 public class Buyer extends Agent {
+	public static final int AUTO_MODE = 0;
+	public static final int MANUAL_MODE = 1;
+	
 	private String agent_name;
-	private float agent_budget;
-	private int agent_mode;
+	public double agent_budget;
+	public int agent_mode = AUTO_MODE;
+	public AID agent_aid;
+	public AnnounceMessage announce;
+	public double last_bid = 0;
 	/*
 	private final MessageTemplate subscribe_message = MessageTemplate.MatchPerformative(Performatives.to_subscribe);
 	private final MessageTemplate bid_message = MessageTemplate.MatchPerformative(Performatives.to_bid);
@@ -27,8 +34,8 @@ public class Buyer extends Agent {
 			agent_name = (String) args[0];
 			agent_budget = (float) args[1];
 			// agent_mode = (int) args[2];
-			
-			addBehaviour(new Subscribe());
+			agent_aid = getAID();
+			addBehaviour(new Subscribe(this));
 		} else {
 			System.out.println("No name specified");
 			doDelete();
