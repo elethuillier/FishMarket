@@ -23,7 +23,7 @@ public class Receive_announce extends Behaviour {
 		ACLMessage message = myAgent.receive();
 		if (message != null) {
 			if (message.getPerformative() == shared.Performatives.to_announce) {
-				if (buyer.agent_mode == agents.buyer.Buyer.AUTO_MODE) {
+				if (buyer.agent_mode == shared.Utils.ControlMode.AUTO) {
 					receive_announce = true;
 					Object serial = null;
 					try {

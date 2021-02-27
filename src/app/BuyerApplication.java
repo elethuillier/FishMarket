@@ -18,7 +18,9 @@ import java.io.IOException;
 
 public class BuyerApplication extends Application {
     public static BuyerApplication self;
-    private static String agent_name;
+    public static String agent_name = "Bob";
+    public static String str_agent_budget = "100";
+    public static BuyerController controller;
 
     private final ObservableList<AuctionBuyerElement> observable_auctions = FXCollections.observableArrayList();
 
@@ -28,11 +30,14 @@ public class BuyerApplication extends Application {
     public BuyerApplication() {
         super();
         self = this;
-        Boot.main(new String[]{"-local-port", EnvConfiguration.default_port, agent_name + ":agents.buyer.Buyer()"});
+        Boot.main(new String[]{"-local-port", "1112", agent_name + str_agent_budget + ":agents.buyer.Buyer()"});
     }
 
     public static void main(String[] args) {
-        if(args.length > 0 && !args[0].isEmpty()) agent_name = args[0];
+        if(args.length > 0 && !args[0].isEmpty() && !args[1].isEmpty()) {
+        	agent_name = args[0];
+        	str_agent_budget = args[1];
+        }
         launch(args);
     }
 
@@ -46,7 +51,7 @@ public class BuyerApplication extends Application {
             primaryStage.setScene(new Scene(root));
             primaryStage.show();
 
-            BuyerController controller = loader.getController();
+            controller = loader.getController();
             controller.setApp(this);
         } catch (IOException e) {
             e.printStackTrace();

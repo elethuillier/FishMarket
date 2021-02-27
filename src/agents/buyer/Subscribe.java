@@ -1,5 +1,6 @@
 package agents.buyer;
 
+import app.BuyerApplication;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.UnreadableException;
@@ -21,8 +22,7 @@ public class Subscribe extends CyclicBehaviour {
 		Object serial = null;
 		if (message != null) {
 			if (message.getPerformative() == shared.Performatives.to_propagate) {
-				//récupérer l'id de l'enchère ici ?
-				
+				//récupérer l'id de l'enchère ici ?		
 				try {
 					serial = message.getContentObject();
 				} catch (UnreadableException e) {
@@ -34,6 +34,10 @@ public class Subscribe extends CyclicBehaviour {
 						to_propagate = (PropagateMessage) serial;
 					}
 				}
+				BuyerApplication.controller.setProposeListener(auction -> {
+					buyer.my_auctions.add(auction);
+				});
+				
 				myAgent.addBehaviour(new State_behaviour(buyer));
 			}
 		}
