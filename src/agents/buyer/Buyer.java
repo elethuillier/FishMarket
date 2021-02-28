@@ -18,7 +18,7 @@ public class Buyer extends Agent {
 	public double agent_budget;
 	public ControlMode agent_mode = ControlMode.AUTO;
 	public AID agent_aid;
-	public AnnounceMessage announce;
+	public ArrayList<AnnounceMessage> announces;
 	public ArrayList<model.AuctionBuyerElement> my_auctions;
 	public double last_bid = 0;
 

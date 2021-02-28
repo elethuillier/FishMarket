@@ -11,9 +11,11 @@ public class Receive_announce extends Behaviour {
 	private boolean bid = false;
 	private boolean no_bid = false;
 	private AnnounceMessage announce;
+	private int cpt;
 
-	public Receive_announce(Buyer buyer) {
+	public Receive_announce(Buyer buyer, int cpt) {
 		this.buyer = buyer;
+		this.cpt = cpt;
 	}
 	
 	// Rajouter le cas ou il ne veut pas bid
@@ -35,7 +37,7 @@ public class Receive_announce extends Behaviour {
 					if (serial != null) {
 						if (serial instanceof AnnounceMessage) {
 							announce = (AnnounceMessage) serial;
-							buyer.announce = announce;
+							buyer.announces.add(cpt, announce);
 						}
 						if (buyer.agent_budget > announce.getPrice()) {
 							bid = true;
