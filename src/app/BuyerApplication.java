@@ -32,7 +32,6 @@ public class BuyerApplication extends Application {
     public BuyerApplication() {
         super();
         self = this;
-        Boot.main(new String[]{"-container", "-host", "localhost", "-port", EnvConfiguration.default_port, agent_name + str_agent_budget + ":agents.buyer.Buyer()"});
     }
 
     public static void main(String[] args) {
@@ -60,6 +59,7 @@ public class BuyerApplication extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        Boot.main(new String[]{"-container", "-host", "localhost", "-port", EnvConfiguration.default_port, agent_name + str_agent_budget + ":agents.buyer.Buyer()"});
     }
 
     public AuctionBuyerElement getAuctionFromId(int id) throws Utils.IdMapException {

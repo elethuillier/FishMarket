@@ -77,15 +77,33 @@
                   <Insets left="10.0" right="10.0" top="10.0" />
                </padding>
             </GridPane>
-            <VBox alignment="CENTER" prefHeight="69.0" prefWidth="700.0">
+            <GridPane>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
                <children>
-                  <Button fx:id="button_create" mnemonicParsing="false" prefWidth="98.0" text="Créer annonce">
+                  <Button fx:id="button_create" mnemonicParsing="false" prefWidth="98.0" text="Créer annonce" GridPane.halignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="announce" mnemonicParsing="false" text="Partager annonce" GridPane.columnIndex="1" GridPane.halignment="CENTER">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
                </children>
-            </VBox>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </GridPane>
             <TableView fx:id="auctions" prefHeight="200.0" prefWidth="200.0">
               <columns>
                 <TableColumn fx:id="packs" prefWidth="75.0" text="Annonce" />
