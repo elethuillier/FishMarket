@@ -13,11 +13,11 @@ public class State_behaviour extends FSMBehaviour {
 	public State_behaviour(Seller seller) {
 		super();
 		registerFirstState(new announce(seller), "1");
-		registerState(new OneBid(), "2");
-//		 registerState(new SeveralBid(), "3");
-//		 registerState(new OfferAnwser(), "4");
-//		 registerState(new AttributePack(), "5");
-//		 registerLastState(new WaitPay(), "6");
+		registerState(new OneBid(seller), "2");
+		registerState(new SeveralBid(seller), "3");
+		registerState(new AttributePack(seller), "4");
+//		 registerState(new WaitPay(), "5");
+//		 registerLastState(new Give(), "6");
 
 		registerDefaultTransition("1", "1");
 		registerTransition("1", "1", 1);
