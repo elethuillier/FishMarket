@@ -46,19 +46,16 @@ public class BuyerController {
         auctions.setItems(app.getObservableAuctions());
     }
 
-    public void setManualListener(Consumer<ControlMode> callback) {
+    public void setModeListener(Consumer<ControlMode> callback) {
         manual.setOnMouseClicked(event -> callback.accept(ControlMode.MANUAL));
-    }
-
-    public void setAutoListener(Consumer<ControlMode> callback) {
-        manual.setOnMouseClicked(event -> callback.accept(ControlMode.AUTO));
+        auto.setOnMouseClicked(event -> callback.accept(ControlMode.AUTO));
     }
 
     public void setSubscribeListener(Consumer<AuctionBuyerElement> callback) {
         subscribe.setOnMouseClicked(event -> callback.accept(auctions.getSelectionModel().getSelectedItem()));
     }
 
-    public void setProposeListener(Consumer<AuctionBuyerElement> callback) {
+    public void setBidListener(Consumer<AuctionBuyerElement> callback) {
         propose.setOnMouseClicked(event -> callback.accept(auctions.getSelectionModel().getSelectedItem()));
     }
 }

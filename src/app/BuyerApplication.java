@@ -12,9 +12,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.AuctionBuyerElement;
 import shared.EnvConfiguration;
-import shared.Pack;
+import shared.Utils;
+import shared.model.Pack;
 
 import java.io.IOException;
+import java.util.Optional;
 
 public class BuyerApplication extends Application {
     public static BuyerApplication self;
@@ -30,13 +32,15 @@ public class BuyerApplication extends Application {
     public BuyerApplication() {
         super();
         self = this;
-        Boot.main(new String[]{"-local-port", "1112", agent_name + str_agent_budget + ":agents.buyer.Buyer()"});
+        Boot.main(new String[]{"-container", "-host", "localhost", "-port", EnvConfiguration.default_port, agent_name + str_agent_budget + ":agents.buyer.Buyer()"});
     }
 
     public static void main(String[] args) {
-        if(args.length > 0 && !args[0].isEmpty() && !args[1].isEmpty()) {
+        if(args.length > 0 && !args[0].isEmpty()) {
         	agent_name = args[0];
-        	str_agent_budget = args[1];
+        	if(args.length > 1 && !args[1].isEmpty()) {
+                str_agent_budget = args[1];
+            }
         }
         launch(args);
     }
@@ -58,13 +62,18 @@ public class BuyerApplication extends Application {
         }
     }
 
+    public AuctionBuyerElement getAuctionFromId(int id) throws Utils.IdMapException {
+        Optional<AuctionBuyerElement> optional_auction = observable_auctions.stream().filter(auction -> auction.getId() == id).findFirst();
+        return optional_auction.orElseThrow(() -> new Utils.IdMapException("Auction with id " + id + " not found"));
+    }
+
     public ObservableList<AuctionBuyerElement> getObservableAuctions() {
         return observable_auctions;
     }
 
     private void addTestData() {
         for(int i=0; i<5; i++) {
-            observable_auctions.add(new AuctionBuyerElement("stéphane", new Pack(10, "saumon"), (double) i));
+            observable_auctions.add(new AuctionBuyerElement(i, "stéphane", new Pack(10, "saumon"), (double) i));
         }
     }
 }

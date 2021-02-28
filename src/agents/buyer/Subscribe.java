@@ -34,9 +34,8 @@ public class Subscribe extends CyclicBehaviour {
 						to_propagate = (PropagateMessage) serial;
 					}
 				}
-				BuyerApplication.controller.setProposeListener(auction -> {
-					buyer.my_auctions.add(auction);
-				});
+				// FIXME elian : rename ProposeListener vers BidListener, mais pas plutôt SubscribeListener de base ?
+				BuyerApplication.controller.setBidListener(auction -> buyer.my_auctions.add(auction));
 				
 				myAgent.addBehaviour(new State_behaviour(buyer));
 			}
