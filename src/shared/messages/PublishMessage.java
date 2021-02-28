@@ -1,6 +1,6 @@
 package shared.messages;
 
-import shared.Pack;
+import shared.model.Pack;
 
 import java.io.Serializable;
 

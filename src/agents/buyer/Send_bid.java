@@ -2,11 +2,8 @@ package agents.buyer;
 
 import java.io.IOException;
 
-import jade.core.behaviours.Behaviour;
 import jade.core.behaviours.OneShotBehaviour;
 import jade.lang.acl.ACLMessage;
-import jade.lang.acl.UnreadableException;
-import shared.Auction;
 import shared.messages.BidMessage;
 
 public class Send_bid extends OneShotBehaviour {

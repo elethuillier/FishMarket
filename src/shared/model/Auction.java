@@ -1,4 +1,4 @@
-package shared;
+package shared.model;
 
 import jade.core.AID;
 
@@ -57,6 +57,8 @@ public class Auction implements Serializable {
     public void setCurrentPrice(double current_price) {
         this.current_price = current_price;
     }
+
+    public double getCurrentPrice() { return current_price; }
 
     public void setDone(boolean done) { this.done = done; }
 

@@ -1,4 +1,4 @@
-package shared;
+package shared.model;
 
 public class Pack {
     private final String description;
