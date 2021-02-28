@@ -5,8 +5,10 @@ import java.util.Calendar;
 
 import jade.core.behaviours.Behaviour;
 import jade.lang.acl.ACLMessage;
+import jade.lang.acl.UnreadableException;
 import shared.Performatives;
 import shared.messages.AnnounceMessage;
+import shared.messages.BidMessage;
 
 public class announce extends Behaviour {
 	private final Seller seller;
@@ -21,8 +23,7 @@ public class announce extends Behaviour {
 	public static final int ANNONCE = 1;
 	public static final int ATTENTE = 2;
 	public static final int FIN_ANNONCE = 3;
-	public long cooldown = 0;
-	int auction_id = 0;
+	public long cooldown = -1;
 
 	@Override
 	public void action() {
@@ -30,15 +31,15 @@ public class announce extends Behaviour {
 
 		switch (inProgress) {
 		case ANNONCE:
-			
+
 			// Recuperer Action ID ici ??
 			if (true) {// TODO Remplacer par "Il y a une enchere en cours ? "
 				System.out.println(myAgent.getAID().getName() + " Mise en ligne de l'annonce");
 
 				ACLMessage message = new ACLMessage(shared.Performatives.to_announce);
-				 AnnounceMessage annonce = new AnnounceMessage(auction_id, 50.0);
+				AnnounceMessage annonce = new AnnounceMessage(seller.my_auctionsID.get(0), 50.0);
 				try {
-					 message.setContentObject(annonce);
+					message.setContentObject(annonce);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -58,9 +59,21 @@ public class announce extends Behaviour {
 				if (message.getPerformative() == Performatives.to_bid) {
 					System.out.println(myAgent.getAID().getName() + " Offre recue");
 
-					// NewBid
+					Object serial = null;
+					try {
+						serial = message.getContentObject();
+					} catch (UnreadableException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					if (serial != null) {
+						if (serial instanceof BidMessage) {
+							BidMessage bid = (BidMessage) serial;
+							// Lire le prix de l'offre ?
+						}
 
-					inProgress = FIN_ANNONCE;
+						inProgress = FIN_ANNONCE;
+					}
 				}
 			}
 
@@ -71,12 +84,13 @@ public class announce extends Behaviour {
 
 		// CoolDown dépassé, on renvoie une annonce dans l'enchère avec un prix plus bas
 		// (prix actuel - pas défini par l'user)
-		if (cooldown > 0 && (cooldown + 5000 < Calendar.getInstance().getTimeInMillis())) {
+		if (cooldown > 0 && (cooldown + seller.cooldown < Calendar.getInstance().getTimeInMillis())) {
 			System.out.println(myAgent.getAID().getName() + " pas d'offre reçue, prix baisse");
 			ACLMessage message = new ACLMessage(shared.Performatives.to_announce);
-			 AnnounceMessage annonce = new AnnounceMessage(auction_id, 40.0); //Get price actuel - Pas décrément
+			AnnounceMessage annonce = new AnnounceMessage(seller.my_auctionsID.get(0), 40.0); // Get price actuel - Pas
+																								// décrément
 			try {
-				 message.setContentObject(annonce);
+				message.setContentObject(annonce);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -95,8 +109,8 @@ public class announce extends Behaviour {
 
 	@Override
 	public int onEnd() {
+		cooldown = -1;
 		inProgress = ANNONCE;
 		return 2;
 	}
-
 }
