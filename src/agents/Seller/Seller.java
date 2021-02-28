@@ -17,6 +17,7 @@ public class Seller extends Agent {
 	public double rising_step = step;
 	public double falling_step = step;
 	public int cooldown = 5000;
+	public double Payed = 0;
 
 	List<Integer> my_auctionsID = new ArrayList<Integer>();
 	List<BidMessage> my_bids = new ArrayList<BidMessage>();
