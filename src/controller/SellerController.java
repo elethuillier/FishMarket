@@ -2,6 +2,7 @@ package controller;
 
 import app.SellerApplication;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import model.AuctionSellerElement;
 import shared.model.Pack;
@@ -22,6 +23,8 @@ public class SellerController {
     private TextField falling_step;
     @FXML
     private Button button_create;
+    @FXML
+    private Button announce;
     @FXML
     private TableView<AuctionSellerElement> auctions;
     @FXML
@@ -71,4 +74,9 @@ public class SellerController {
             }
         });
     }
+
+    public void setAnnounceListener(Consumer<AuctionSellerElement> callback) {
+        announce.setOnMouseClicked(event -> callback.accept(auctions.getSelectionModel().getSelectedItem()));
+    }
+
 }
