@@ -12,7 +12,6 @@ import shared.messages.BidMessage;
 
 public class announce extends Behaviour {
 	private final Seller seller;
-	private AnnounceMessage announce;
 
 	public announce(Seller seller) {
 		this.seller = seller;
