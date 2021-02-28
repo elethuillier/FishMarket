@@ -4,14 +4,16 @@ import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import shared.Pack;
+import shared.model.Pack;
 
 public class AuctionSellerElement {
+    private final int id;
     private final StringProperty pack;
     private final DoubleProperty price;
     private final StringProperty buyer;
 
-    public AuctionSellerElement(Pack pack, double price, String buyer) {
+    public AuctionSellerElement(int id, Pack pack, double price, String buyer) {
+        this.id = id;
         this.pack = new SimpleStringProperty(pack.getDescription());
         this.price = new SimpleDoubleProperty(price);
         this.buyer = new SimpleStringProperty(buyer);
@@ -52,4 +54,6 @@ public class AuctionSellerElement {
     public void setBuyer(String buyer) {
         this.buyer.set(buyer);
     }
+
+    public int getId() { return id; }
 }

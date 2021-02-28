@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jade.core.Agent;
-import shared.Auction;
+import shared.model.Auction;
 
 
 public class Seller extends Agent {

@@ -10,14 +10,19 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import model.AuctionBuyerElement;
+import model.AuctionMarketElement;
 import model.AuctionSellerElement;
 import shared.EnvConfiguration;
-import shared.Pack;
+import shared.Utils;
+import shared.model.Pack;
 
 import java.io.IOException;
+import java.util.Optional;
 
 public class SellerApplication extends Application {
     public static SellerApplication self;
+    public static SellerController controller;
     private static String agent_name;
 
     private final ObservableList<AuctionSellerElement> observable_auctions = FXCollections.observableArrayList();
@@ -28,7 +33,7 @@ public class SellerApplication extends Application {
     public SellerApplication() {
         super();
         self = this;
-        Boot.main(new String[]{"-local-port", EnvConfiguration.default_port, agent_name + ":agents.Seller.Seller()"});
+        Boot.main(new String[]{"-container", "-host", "localhost", "-port", EnvConfiguration.default_port, agent_name + ":agents.Seller.Seller()"});
     }
 
     public static void main(String[] args) {
@@ -46,11 +51,16 @@ public class SellerApplication extends Application {
             primaryStage.setScene(new Scene(root));
             primaryStage.show();
 
-            SellerController controller = loader.getController();
+            controller = loader.getController();
             controller.setApp(this);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public AuctionSellerElement getAuctionFromId(int id) throws Utils.IdMapException {
+        Optional<AuctionSellerElement> optional_auction = observable_auctions.stream().filter(auction -> auction.getId() == id).findFirst();
+        return optional_auction.orElseThrow(() -> new Utils.IdMapException("Auction with id " + id + " not found"));
     }
 
     public ObservableList<AuctionSellerElement> getObservableAuctions() {
@@ -59,7 +69,7 @@ public class SellerApplication extends Application {
 
     private void addTestData() {
         for(int i=0; i<5; i++) {
-            observable_auctions.add(new AuctionSellerElement(new Pack(10,"huitre"), i, "jean-rémi"));
+            observable_auctions.add(new AuctionSellerElement(i, new Pack(10,"huitre"), i, "jean-rémi"));
         }
     }
 }

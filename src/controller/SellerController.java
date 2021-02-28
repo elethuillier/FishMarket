@@ -4,7 +4,7 @@ import app.SellerApplication;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import model.AuctionSellerElement;
-import shared.Pack;
+import shared.model.Pack;
 import shared.messages.PublishMessage;
 
 import java.util.function.Consumer;
