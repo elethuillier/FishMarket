@@ -1,9 +1,7 @@
 package agents.market;
 
 import jade.core.Agent;
-import jade.lang.acl.MessageTemplate;
-import shared.Auction;
-import shared.Performatives;
+import shared.model.Auction;
 
 import java.util.ArrayList;
 import java.util.List;

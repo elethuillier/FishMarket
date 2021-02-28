@@ -1,12 +1,15 @@
 package agents.market;
 
+import app.MarketApplication;
 import jade.core.AID;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.UnreadableException;
-import shared.Auction;
+import model.AuctionMarketElement;
+import shared.model.Auction;
 import shared.Performatives;
 import shared.messages.*;
+import shared.Utils.IdMapException;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -36,10 +39,16 @@ public class MarketBehaviour extends CyclicBehaviour {
                             PublishMessage publish = (PublishMessage) serial;
                             Auction auction = new Auction(publish.getPack(), message.getSender(), publish.getRisingStep(), publish.getFallingStep(), publish.getCooldown());
                             market.auctions.add(auction);
+                            MarketApplication.self.getObservableAuctions().add(new AuctionMarketElement(auction.getId(), auction.getSeller().getName(), auction.getPack(), auction.getCurrentPrice()));
 
                             ACLMessage response = new ACLMessage(Performatives.to_propagate);
                             PropagateMessage propagate = new PropagateMessage(auction.hashCode(), auction.getSeller(), auction.getPack());
                             response.setContentObject(propagate);
+
+                            MarketApplication.self.getObservableAuctions().add(
+                                    new AuctionMarketElement(auction.getId(), propagate.getSellerId().getName(), propagate.getPack(), propagate.getPack().getStartPrice())
+                            );
+
                             myAgent.send(response);
                         }
                         break;
@@ -65,7 +74,7 @@ public class MarketBehaviour extends CyclicBehaviour {
                             AnnounceMessage announce = (AnnounceMessage) serial;
                             Auction auction = getAuctionFromId(announce.getAuctionId());
                             auction.setCurrentPrice(announce.getPrice());
-
+                            MarketApplication.self.getAuctionFromId(auction.getId()).setPrice(auction.getCurrentPrice());
                             message.clearAllReceiver();
                             for(AID sub_id : auction.getSubscribers()) {
                                 message.addReceiver(sub_id);
@@ -151,18 +160,15 @@ public class MarketBehaviour extends CyclicBehaviour {
                             message.setSender(market.getAID());
                             market.send(message);
 
+                            AuctionMarketElement observable_auction = MarketApplication.self.getAuctionFromId(auction.getId());
+                            observable_auction.setDone(true); observable_auction.checkDone.run();
+
                             auction.setDone(true);
                         }
                     } catch (UnreadableException | IdMapException e) {
                         e.printStackTrace();
                     }
             }
-        }
-    }
-
-    private static class IdMapException extends RuntimeException {
-        public IdMapException(String message) {
-            super(message);
         }
     }
 }

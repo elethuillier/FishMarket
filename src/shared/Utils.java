@@ -18,13 +18,13 @@ public class Utils {
         return Arrays.stream(strNums).allMatch(Utils::isNumeric);
     }
 
-    public class BackgroundColor {
-        public static final String RED = "";
-        public static final String BLACK = "";
-        public static final String GREEN = "";
+    public static class BackgroundColor {
+        public static final String RED = "red";
+        public static final String BLACK = "black";
+        public static final String GREEN = "green";
     }
 
-    public class LabelContent {
+    public static class LabelContent {
         public static final String CREATE = "Créez votre annonce";
         public static final String MODE = "Choisissez votre mode de fonctionnement (manuel ou automatique)";
         public static final String ONE_PROPOSITION = "Une seule proposition pour le moment";
@@ -37,5 +37,11 @@ public class Utils {
 
     public enum ControlMode {
         MANUAL, AUTO
+    }
+
+    public static class IdMapException extends RuntimeException {
+        public IdMapException(String message) {
+            super(message);
+        }
     }
 }
