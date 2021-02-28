@@ -33,7 +33,6 @@ public class SellerApplication extends Application {
     public SellerApplication() {
         super();
         self = this;
-        Boot.main(new String[]{"-container", "-host", "localhost", "-port", EnvConfiguration.default_port, agent_name + ":agents.Seller.Seller()"});
     }
 
     public static void main(String[] args) {
@@ -56,6 +55,7 @@ public class SellerApplication extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        Boot.main(new String[]{"-container", "-host", "localhost", "-port", EnvConfiguration.default_port, agent_name + ":agents.Seller.Seller()"});
     }
 
     public AuctionSellerElement getAuctionFromId(int id) throws Utils.IdMapException {

@@ -31,7 +31,6 @@ public class MarketApplication extends Application {
 
     public MarketApplication() {
         self = this;
-        Boot.main(new String[]{"-local-port", EnvConfiguration.default_port, "-gui", agent_name + ":agents.market.Market()"});
     }
 
     public static void main(String[] args) {
@@ -54,6 +53,7 @@ public class MarketApplication extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        Boot.main(new String[]{"-local-port", EnvConfiguration.default_port, "-gui", agent_name + ":agents.market.Market()"});
     }
 
     private void addTestData() {
