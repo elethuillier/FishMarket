@@ -29,6 +29,7 @@ public class Wait_Propagate extends CyclicBehaviour {
 				if (serial != null) {
 					if (serial instanceof PropagateMessage) {
 						to_propagate = (PropagateMessage) serial;
+						seller.my_auctionsID.add(to_propagate.getAuctionId());
 					}
 				}
 
