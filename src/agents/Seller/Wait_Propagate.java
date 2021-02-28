@@ -8,7 +8,7 @@ import shared.messages.PropagateMessage;
 public class Wait_Propagate extends CyclicBehaviour {
 	private final Seller seller;
 	public PropagateMessage to_propagate;
-	private int auction_id = 0; 
+	private int auction_id = 0;
 
 	public Wait_Propagate(Seller seller) {
 		this.seller = seller;

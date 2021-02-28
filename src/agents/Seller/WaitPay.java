@@ -3,7 +3,6 @@ package agents.Seller;
 import jade.core.behaviours.OneShotBehaviour;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.UnreadableException;
-import shared.messages.AnnounceMessage;
 import shared.messages.PayMessage;
 
 public class WaitPay extends OneShotBehaviour {

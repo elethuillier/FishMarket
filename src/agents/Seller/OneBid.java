@@ -4,10 +4,7 @@ import java.util.Calendar;
 
 import jade.core.behaviours.Behaviour;
 import jade.lang.acl.ACLMessage;
-import jade.lang.acl.MessageTemplate;
 import jade.lang.acl.UnreadableException;
-import shared.Performatives;
-import shared.messages.AnnounceMessage;
 import shared.messages.BidMessage;
 
 public class OneBid extends Behaviour {
@@ -45,7 +42,6 @@ public class OneBid extends Behaviour {
 						if (serial instanceof BidMessage) {
 							BidMessage bid = (BidMessage) serial;
 							seller.my_bids.add(bid);
-							// Lire le prix de l'offre ?
 
 						}
 
@@ -71,7 +67,7 @@ public class OneBid extends Behaviour {
 	// Overrided functions
 	@Override
 	public boolean done() {
-		return (inProgress==FIN) || (inProgress==BID);
+		return (inProgress == FIN) || (inProgress == BID);
 	}
 
 	@Override
