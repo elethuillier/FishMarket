@@ -1,3 +1,3 @@
 cd ../../
-mkdir out
-javac -encoding UTF-8 -cp lib/jade.jar -d bin src/*.java
+mkdir -p out
+javac -encoding UTF-8 -cp lib/jade.jar -d out @files.txt
