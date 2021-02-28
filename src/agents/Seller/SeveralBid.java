@@ -7,18 +7,17 @@ import jade.lang.acl.ACLMessage;
 import jade.lang.acl.UnreadableException;
 import shared.messages.BidMessage;
 
-public class OneBid extends Behaviour {
+public class SeveralBid extends Behaviour {
 	private final Seller seller;
 
-	public OneBid(Seller seller) {
+	public SeveralBid(Seller seller) {
 		this.seller = seller;
 	}
 
 	private static final long serialVersionUID = 1L;
 	private int inProgress = 0;
-	public static final int FIN = 4;
-	public static final int ATTENTE = 2;
-	public static final int BID = 3;
+	public static final int FIN = 1;
+	public static final int ATTENTE = 3;
 	public long cooldown = -1;
 
 	@Override
@@ -42,10 +41,9 @@ public class OneBid extends Behaviour {
 						if (serial instanceof BidMessage) {
 							BidMessage bid = (BidMessage) serial;
 							seller.my_bids.add(bid);
-
 						}
 
-						inProgress = BID;
+						inProgress = FIN;
 					}
 				}
 			}
@@ -67,7 +65,7 @@ public class OneBid extends Behaviour {
 	// Overrided functions
 	@Override
 	public boolean done() {
-		return (inProgress == FIN) || (inProgress == BID);
+		return (inProgress == FIN) || (inProgress == ATTENTE);
 	}
 
 	@Override

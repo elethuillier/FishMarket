@@ -2,7 +2,6 @@ package controller;
 
 import app.SellerApplication;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import model.AuctionSellerElement;
 import shared.model.Pack;
@@ -75,8 +74,8 @@ public class SellerController {
         });
     }
 
-    public void setAnnounceListener(Consumer<AuctionSellerElement> callback) {
-        announce.setOnMouseClicked(event -> callback.accept(auctions.getSelectionModel().getSelectedItem()));
+    public void setAnnounceListener(Runnable callback) {
+        announce.setOnMouseClicked(event -> callback.run());
     }
 
 }
