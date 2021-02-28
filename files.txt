@@ -12,11 +12,15 @@ src/agents/buyer/Subscribe.java
 src/agents/market/Market.java
 src/agents/market/MarketBehaviour.java
 src/agents/Seller/announce.java
+src/agents/Seller/AttributePack.java
+src/agents/Seller/Give.java
 src/agents/Seller/OneBid.java
 src/agents/Seller/Publish.java
 src/agents/Seller/Seller.java
+src/agents/Seller/SeveralBid.java
 src/agents/Seller/State_behaviour.java
 src/agents/Seller/Wait_Propagate.java
+src/agents/Seller/WaitPay.java
 src/app/SellerApplication.java
 src/app/MarketApplication.java
 src/app/BuyerApplication.java
