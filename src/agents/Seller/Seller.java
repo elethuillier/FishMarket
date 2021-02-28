@@ -1,23 +1,29 @@
 package agents.Seller;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import jade.core.AID;
 import jade.core.Agent;
-import shared.model.Auction;
-
 
 public class Seller extends Agent {
-    private List<String[]> PropositionsRecues = new ArrayList<>();
-    private List<Auction> OffresEnvoyees = new ArrayList<>();
-	@Override
-    protected void setup() {
-        System.out.println("L'agent "+getAID().getName()+ " est prêt.");
+	// private String agent_name;
+	public AID agent_aid;
 
-    }
-	
 	@Override
-    protected void takeDown() {
-        System.out.println("Agent "+ getAID().getName()+ " terminating.");
-    }
+	protected void setup() {
+		super.setup();
+		System.out.println("L'agent " + getAID().getName() + " est prêt.");
+		Object[] args = getArguments();
+		if (args != null && args.length > 0) {
+			agent_aid = getAID();
+			addBehaviour(new Publish(this));
+		} else {
+			System.out.println("Inconnu");
+			doDelete();
+		}
+
+	}
+
+	@Override
+	protected void takeDown() {
+		System.out.println("Agent " + getAID().getName() + " terminé.");
+	}
 }
