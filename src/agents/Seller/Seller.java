@@ -16,8 +16,6 @@ public class Seller extends Agent {
 	public AID agent_aid;
 	public double Payed = 0;
 	public AID destinataire;
-
-	public List<Integer> my_auctionsID = new ArrayList<Integer>();
 	public List<BidMessage> my_bids = new ArrayList<BidMessage>();
 	public Auction monAuction;
 

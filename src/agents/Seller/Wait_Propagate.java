@@ -30,7 +30,6 @@ public class Wait_Propagate extends Behaviour {
 				if (serial != null) {
 					if (serial instanceof PropagateMessage) {
 						to_propagate = (PropagateMessage) serial;
-						seller.my_auctionsID.add(to_propagate.getAuctionId());
 						recu = true;
 					}
 				}
