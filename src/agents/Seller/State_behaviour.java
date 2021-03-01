@@ -13,10 +13,9 @@ public class State_behaviour extends FSMBehaviour {
 
 	public State_behaviour(Seller seller) {
 		super();
-
-		SellerApplication.controller.setAnnounceListener(() -> {
-			registerFirstState(new announce(seller), "1");
-		});
+		
+		registerFirstState(new announce(seller), "1");
+		
 
 		registerState(new OneBid(seller), "2");
 		registerState(new SeveralBid(seller), "3");

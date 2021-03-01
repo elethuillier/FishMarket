@@ -1,5 +1,6 @@
 package agents.Seller;
 
+import app.SellerApplication;
 import jade.core.behaviours.Behaviour;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.UnreadableException;
@@ -33,7 +34,10 @@ public class Wait_Propagate extends Behaviour {
 						recu = true;
 					}
 				}
-				myAgent.addBehaviour(new State_behaviour(seller));
+				SellerApplication.controller.setAnnounceListener(() -> {
+					myAgent.addBehaviour(new State_behaviour(seller));
+				});
+				
 			}
 		} else {
 			block();
