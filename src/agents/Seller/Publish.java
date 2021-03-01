@@ -41,6 +41,7 @@ public class Publish extends OneShotBehaviour {
 		}
 
 		ACLMessage messageLoc = new ACLMessage(shared.Performatives.to_publish);
+		messageLoc.addReceiver(seller.destinataire);
 		try {
 			messageLoc.setContentObject(to_publish);
 		} catch (IOException e) {

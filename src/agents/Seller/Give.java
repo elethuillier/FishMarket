@@ -18,6 +18,7 @@ public class Give extends OneShotBehaviour {
 		System.out.println("execution de l'etat " + getBehaviourName());
 		ACLMessage message = new ACLMessage(shared.Performatives.to_give);
 		GiveMessage give = new GiveMessage(seller.my_auctionsID.get(0));
+		message.addReceiver(seller.destinataire);
 		try {
 			message.setContentObject(give);
 		} catch (IOException e) {

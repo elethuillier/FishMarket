@@ -19,6 +19,7 @@ public class AttributePack extends OneShotBehaviour {
 		ACLMessage message = new ACLMessage(shared.Performatives.to_attribute);
 		AttributeMessage attribute = new AttributeMessage(seller.my_auctionsID.get(0),
 				seller.my_bids.get(seller.my_bids.size() - 1).getBuyerId());
+		message.addReceiver(seller.destinataire);
 		try {
 			message.setContentObject(attribute);
 		} catch (IOException e) {

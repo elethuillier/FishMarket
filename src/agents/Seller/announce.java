@@ -37,6 +37,7 @@ public class announce extends Behaviour {
 
 				ACLMessage message = new ACLMessage(shared.Performatives.to_announce);
 				AnnounceMessage annonce = new AnnounceMessage(seller.my_auctionsID.get(0), 50.0);
+				message.addReceiver(seller.destinataire);
 				try {
 					message.setContentObject(annonce);
 				} catch (IOException e) {
@@ -89,7 +90,7 @@ public class announce extends Behaviour {
 			System.out.println(myAgent.getAID().getName() + " pas d'offre reçue, prix baisse");
 			ACLMessage message = new ACLMessage(shared.Performatives.to_announce);
 			AnnounceMessage annonce = new AnnounceMessage(seller.my_auctionsID.get(0), 40.0); // Get price actuel - Pas
-																								// décrément
+			message.addReceiver(seller.destinataire);																					// décrément
 			try {
 				message.setContentObject(annonce);
 			} catch (IOException e) {
