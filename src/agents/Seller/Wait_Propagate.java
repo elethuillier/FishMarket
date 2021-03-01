@@ -9,6 +9,7 @@ public class Wait_Propagate extends Behaviour {
 	private final Seller seller;
 	public PropagateMessage to_propagate;
 	private int auction_id = 0;
+	private boolean recu = false;
 
 	public Wait_Propagate(Seller seller) {
 		this.seller = seller;
@@ -30,6 +31,7 @@ public class Wait_Propagate extends Behaviour {
 					if (serial instanceof PropagateMessage) {
 						to_propagate = (PropagateMessage) serial;
 						seller.my_auctionsID.add(to_propagate.getAuctionId());
+						recu = true;
 					}
 				}
 
@@ -43,6 +45,6 @@ public class Wait_Propagate extends Behaviour {
 	@Override
 	public boolean done() {
 		// TODO Auto-generated method stub
-		return false;
+		return recu;
 	}
 }

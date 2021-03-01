@@ -21,7 +21,6 @@ public class Publish extends OneShotBehaviour {
 
 	@Override
 	public void action() {
-
 		DFAgentDescription dfd = new DFAgentDescription();
 		ServiceDescription sd = new ServiceDescription();
 		sd.setType("market");
@@ -51,6 +50,5 @@ public class Publish extends OneShotBehaviour {
 		messageLoc.setSender(myAgent.getAID());
 		myAgent.send(messageLoc);
 		myAgent.addBehaviour(new Wait_Propagate(seller));
-
 	}
 }

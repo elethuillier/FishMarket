@@ -31,8 +31,8 @@ public class announce extends Behaviour {
 		switch (inProgress) {
 		case ANNONCE:
 
-			// Recuperer Action ID ici ??
-			if (true) {// TODO Remplacer par "Il y a une enchere en cours ? "
+			
+			if (true) {
 				System.out.println(myAgent.getAID().getName() + " Mise en ligne de l'annonce");
 
 				ACLMessage message = new ACLMessage(shared.Performatives.to_announce);
@@ -109,7 +109,6 @@ public class announce extends Behaviour {
 
 	@Override
 	public int onEnd() {
-		cooldown = -1;
 		inProgress = ANNONCE;
 		return 2;
 	}
