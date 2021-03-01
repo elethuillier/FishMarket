@@ -6,6 +6,7 @@ import app.BuyerApplication;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.UnreadableException;
+import model.AuctionBuyerElement;
 import shared.messages.BidMessage;
 import shared.messages.PropagateMessage;
 import shared.messages.RepBidMessage;
@@ -37,6 +38,7 @@ public class Subscribe extends CyclicBehaviour {
 				if (serial != null) {
 					if (serial instanceof PropagateMessage) {
 						to_propagate = (PropagateMessage) serial;
+						BuyerApplication.self.getObservableAuctions().add(new AuctionBuyerElement(to_propagate.getAuctionId(), to_propagate.getSellerId().getLocalName(), to_propagate.getPack(), to_propagate.getPack().getStartPrice()));
 					}
 				}
 				final ACLMessage message_sub = new ACLMessage(shared.Performatives.to_subscribe);
