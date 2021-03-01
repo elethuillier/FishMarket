@@ -27,7 +27,7 @@ public class Subscribe extends CyclicBehaviour {
 		Object serial = null;
 		if (message != null) {
 			if (message.getPerformative() == shared.Performatives.to_propagate) {
-				// récupérer l'id de l'enchère ici ?
+				buyer.market_aid = message.getSender();
 				try {
 					serial = message.getContentObject();
 				} catch (UnreadableException e) {
@@ -51,6 +51,7 @@ public class Subscribe extends CyclicBehaviour {
 					}
 					message_sub.clearAllReceiver();
 					message_sub.setSender(myAgent.getAID());
+					message_sub.addReceiver(buyer.market_aid);
 					myAgent.send(message_sub);
 					myAgent.addBehaviour(new State_behaviour(buyer, cpt_announce));
 					cpt_announce++;

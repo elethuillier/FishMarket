@@ -28,6 +28,7 @@ public class Send_pay extends OneShotBehaviour {
 		}
 		message.clearAllReceiver();
 		message.setSender(myAgent.getAID());
+		message.addReceiver(buyer.market_aid);
 		myAgent.send(message);
 	}
 

@@ -22,6 +22,7 @@ public class Buyer extends Agent {
 	public ArrayList<AnnounceMessage> announces;
 	public ArrayList<model.AuctionBuyerElement> my_auctions;
 	public double last_bid = 0;
+	public AID market_aid;  
 
 	@Override
 	protected void setup() {
