@@ -8,7 +8,7 @@ import jade.domain.FIPAException;
 import java.util.Arrays;
 
 public class Utils {
-    void register(Agent a, ServiceDescription sd) {
+    public static void register(Agent a, ServiceDescription sd) {
         DFAgentDescription dfd = new DFAgentDescription();
         dfd.setName(a.getAID());
         dfd.addServices(sd);

@@ -38,7 +38,7 @@ public class Buyer extends Agent {
 			ServiceDescription sd = new ServiceDescription();
 			sd.setType("buyer");
 			sd.setName(getLocalName());
-			register(this, sd);
+			shared.Utils.register(this, sd);
 			addBehaviour(new Subscribe(this));
 		} else {
 			System.out.println("No name specified");
