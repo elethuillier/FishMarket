@@ -7,26 +7,26 @@ import jade.lang.acl.ACLMessage;
 import shared.messages.PublishMessage;
 
 public class Publish extends CyclicBehaviour {
-	private final Seller seller;
 	public PublishMessage to_publish;
+	Seller seller;
 
-	public Publish(Seller seller) {
+	public Publish(PublishMessage message, Seller seller) {
+		this.to_publish = message;
 		this.seller = seller;
 	}
 
 	@Override
 	public void action() {
-		ACLMessage message = new ACLMessage(shared.Performatives.to_publish);
-		to_publish = new PublishMessage(seller.pack, seller.rising_step, seller.falling_step, seller.cooldown);
+		ACLMessage messageLoc = new ACLMessage(shared.Performatives.to_publish);
 		try {
-			message.setContentObject(to_publish);
+			messageLoc.setContentObject(to_publish);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		message.clearAllReceiver();
-		message.setSender(myAgent.getAID());
-		myAgent.send(message);
+		messageLoc.clearAllReceiver();
+		messageLoc.setSender(myAgent.getAID());
+		myAgent.send(messageLoc);
 
 		myAgent.addBehaviour(new Wait_Propagate(seller));
 
