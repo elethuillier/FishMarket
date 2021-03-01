@@ -74,6 +74,8 @@ public class announce extends Behaviour {
 						inProgress = FIN_ANNONCE;
 					}
 				}
+			}else {
+				block();
 			}
 
 			break;

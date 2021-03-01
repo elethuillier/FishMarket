@@ -2,11 +2,11 @@ package agents.Seller;
 
 import java.io.IOException;
 
-import jade.core.behaviours.CyclicBehaviour;
+import jade.core.behaviours.OneShotBehaviour;
 import jade.lang.acl.ACLMessage;
 import shared.messages.PublishMessage;
 
-public class Publish extends CyclicBehaviour {
+public class Publish extends OneShotBehaviour {
 	public PublishMessage to_publish;
 	Seller seller;
 

@@ -6,6 +6,10 @@ import java.util.List;
 import app.SellerApplication;
 import jade.core.AID;
 import jade.core.Agent;
+import jade.domain.DFService;
+import jade.domain.FIPAException;
+import jade.domain.FIPAAgentManagement.DFAgentDescription;
+import jade.domain.FIPAAgentManagement.ServiceDescription;
 import shared.messages.BidMessage;
 import shared.model.Pack;
 
@@ -25,6 +29,10 @@ public class Seller extends Agent {
 	@Override
 	protected void setup() {
 		super.setup();
+		ServiceDescription sd = new ServiceDescription();
+		sd.setType("seller");
+		sd.setName(getLocalName());
+		register(this, sd);
 		System.out.println("L'agent " + getAID().getName() + " est prêt.");
 		Object[] args = getArguments();
 		if (args != null && args.length > 0) {
@@ -37,7 +45,18 @@ public class Seller extends Agent {
 			System.out.println("Inconnu");
 			doDelete();
 		}
+	}
 
+	public void register(Agent a, ServiceDescription sd) {
+		DFAgentDescription dfd = new DFAgentDescription();
+		dfd.setName(getAID());
+		dfd.addServices(sd);
+
+		try {
+			DFService.register(this, dfd);
+		} catch (FIPAException fe) {
+			fe.printStackTrace();
+		}
 	}
 
 	@Override

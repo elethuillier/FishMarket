@@ -48,6 +48,8 @@ public class OneBid extends Behaviour {
 						inProgress = BID;
 					}
 				}
+			}else {
+				block();
 			}
 			break;
 

@@ -42,10 +42,11 @@ public class SeveralBid extends Behaviour {
 							BidMessage bid = (BidMessage) serial;
 							seller.my_bids.add(bid);
 						}
-
 						inProgress = FIN;
 					}
 				}
+			}else {
+				block();
 			}
 			break;
 
