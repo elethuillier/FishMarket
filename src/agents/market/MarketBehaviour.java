@@ -3,6 +3,9 @@ package agents.market;
 import app.MarketApplication;
 import jade.core.AID;
 import jade.core.behaviours.CyclicBehaviour;
+import jade.domain.DFService;
+import jade.domain.FIPAAgentManagement.DFAgentDescription;
+import jade.domain.FIPAException;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.UnreadableException;
 import model.AuctionMarketElement;
@@ -31,8 +34,10 @@ public class MarketBehaviour extends CyclicBehaviour {
     public void action() {
         ACLMessage message = myAgent.receive();
         if(message != null) {
+            System.out.println("a message is received");
             switch(message.getPerformative()) {
                 case Performatives.to_publish:
+                    System.out.println("to_publish received");
                     try {
                         Object serial = message.getContentObject();
                         if(serial instanceof PublishMessage) {
@@ -49,10 +54,17 @@ public class MarketBehaviour extends CyclicBehaviour {
                                     new AuctionMarketElement(auction.getId(), propagate.getSellerId().getName(), propagate.getPack(), propagate.getPack().getStartPrice())
                             );
 
+                            DFAgentDescription dfd = new DFAgentDescription();
+                            DFAgentDescription[] result = DFService.search(myAgent, dfd);
+                            System.out.println(result.length + " results" );
+                            for(DFAgentDescription description : result) {
+                                response.addReceiver(description.getName());
+                            }
+
                             myAgent.send(response);
                         }
                         break;
-                    } catch (UnreadableException | IOException e) {
+                    } catch (UnreadableException | IOException | FIPAException e) {
                         e.printStackTrace();
                     }
                 case Performatives.to_subscribe:
