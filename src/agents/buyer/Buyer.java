@@ -27,13 +27,13 @@ public class Buyer extends Agent {
 	@Override
 	protected void setup() {
 		super.setup();
-		BuyerApplication.controller.setModeListener(mode -> agent_mode = mode);
+		BuyerApplication.controller.setModeListener((mode, limit) -> agent_mode = mode);
 		System.out.println("Agent: " + getAID().getName() + " is ready.");
 		// Get the name of the agent as a start-up argument
 		Object[] args = getArguments();
 		if (args != null && args.length > 0) {
 			agent_name = BuyerApplication.agent_name;
-			agent_budget = Double.parseDouble(BuyerApplication.str_agent_budget);
+			// agent_budget = Double.parseDouble(BuyerApplication.str_agent_budget);
 			// agent_mode = (int) args[2];
 			agent_aid = getAID();
 			ServiceDescription sd = new ServiceDescription();
