@@ -1,8 +1,24 @@
 package shared;
 
+import jade.core.Agent;
+import jade.domain.DFService;
+import jade.domain.FIPAAgentManagement.DFAgentDescription;
+import jade.domain.FIPAAgentManagement.ServiceDescription;
+import jade.domain.FIPAException;
 import java.util.Arrays;
 
 public class Utils {
+    void register(Agent a, ServiceDescription sd) {
+        DFAgentDescription dfd = new DFAgentDescription();
+        dfd.setName(a.getAID());
+        dfd.addServices(sd);
+
+        try {
+            DFService.register(a, dfd );
+        } catch (FIPAException fe) {
+            fe.printStackTrace();
+        }
+    }
 
     public static boolean isNumeric(String strNum) {
         if (strNum == null) return false;
