@@ -1,11 +1,11 @@
 package agents.Seller;
 
-import jade.core.behaviours.CyclicBehaviour;
+import jade.core.behaviours.Behaviour;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.UnreadableException;
 import shared.messages.PropagateMessage;
 
-public class Wait_Propagate extends CyclicBehaviour {
+public class Wait_Propagate extends Behaviour {
 	private final Seller seller;
 	public PropagateMessage to_propagate;
 	private int auction_id = 0;
@@ -35,7 +35,14 @@ public class Wait_Propagate extends CyclicBehaviour {
 
 				myAgent.addBehaviour(new State_behaviour(seller));
 			}
+		} else {
+			block();
 		}
+	}
 
+	@Override
+	public boolean done() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }
