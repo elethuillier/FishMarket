@@ -10,19 +10,19 @@ public class State_behaviour extends FSMBehaviour {
 		return super.onEnd();
 	}
 
-	public State_behaviour(Buyer buyer) {
+	public State_behaviour(Buyer buyer, int cpt) {
 		super();
 		registerFirstState(new Start(), "1");
-		registerState(new Receive_announce(buyer), "2");
-		registerState(new Send_bid(buyer), "3");
+		registerState(new Receive_announce(buyer, cpt), "2");
+		registerState(new Send_bid(buyer, cpt), "3");
 		registerState(new Receive_rep_bid(), "4");
 		registerState(new Receive_to_attribute(), "5");
-		registerState(new Send_pay(buyer), "6");
+		registerState(new Send_pay(buyer, cpt), "6");
 		registerLastState(new Receive_to_give(), "7");
 		registerLastState(new No_bid(), "8");
 
 		registerTransition("1", "2", 0); // Start vers announce
-		registerTransition("2", "2", 1);
+		// registerTransition("2", "2", 1);
 		registerTransition("2", "3", 2); // Announce vers send_bid
 		registerTransition("3", "4", 3); // Send_bid vers rep_bid
 		registerTransition("4", "1", 4); // Rep_bid vers Start

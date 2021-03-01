@@ -1,11 +1,11 @@
 package agents.Seller;
 
-import jade.core.behaviours.OneShotBehaviour;
+import jade.core.behaviours.Behaviour;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.UnreadableException;
 import shared.messages.PayMessage;
 
-public class WaitPay extends OneShotBehaviour {
+public class WaitPay extends Behaviour {
 	private final Seller seller;
 
 	public WaitPay(Seller seller) {
@@ -32,12 +32,19 @@ public class WaitPay extends OneShotBehaviour {
 					}
 				}
 			}
+		} else {
+			block();
 		}
 	}
 
 	@Override
 	public int onEnd() {
 		return 0;
+	}
+
+	@Override
+	public boolean done() {
+		return true;
 	}
 
 }

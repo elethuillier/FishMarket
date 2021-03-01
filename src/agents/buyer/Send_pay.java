@@ -8,16 +8,18 @@ import shared.messages.PayMessage;
 
 public class Send_pay extends OneShotBehaviour {
 	private final Buyer buyer;
+	private int cpt;
 
-	public Send_pay(Buyer buyer) {
+	public Send_pay(Buyer buyer, int cpt) {
 		this.buyer = buyer;
+		this.cpt = cpt;
 	}
 
 	@Override
 	public void action() {
 		// TODO Auto-generated method stub
 		ACLMessage message = new ACLMessage(shared.Performatives.to_pay);
-		PayMessage pay = new PayMessage(buyer.announce.getAuctionId() ,buyer.last_bid);
+		PayMessage pay = new PayMessage(buyer.announces.get(cpt).getAuctionId() ,buyer.last_bid);
 		try {
 			message.setContentObject(pay);
 		} catch (IOException e) {
