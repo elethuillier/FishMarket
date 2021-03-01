@@ -9,7 +9,6 @@ import shared.messages.BidMessage;
 import shared.model.Pack;
 
 public class Seller extends Agent {
-	private String agent_name;
 	public AID agent_aid;
 	
 	public Pack pack = new Pack(400, "Poisson");
