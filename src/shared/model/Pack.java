@@ -1,6 +1,8 @@
 package shared.model;
 
-public class Pack {
+import java.io.Serializable;
+
+public class Pack implements Serializable {
     private final String description;
     private final double start_price;
 

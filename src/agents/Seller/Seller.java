@@ -3,15 +3,15 @@ package agents.Seller;
 import java.util.ArrayList;
 import java.util.List;
 
+import app.SellerApplication;
 import jade.core.AID;
 import jade.core.Agent;
 import shared.messages.BidMessage;
 import shared.model.Pack;
 
 public class Seller extends Agent {
-	private String agent_name;
 	public AID agent_aid;
-	
+
 	public Pack pack = new Pack(400, "Poisson");
 	public double step = 20.0;
 	public double rising_step = step;
@@ -29,7 +29,10 @@ public class Seller extends Agent {
 		Object[] args = getArguments();
 		if (args != null && args.length > 0) {
 			agent_aid = getAID();
-			addBehaviour(new Publish(this));
+			SellerApplication.controller.setCreateListener(message -> {
+				addBehaviour(new Publish(message, this));
+			});
+
 		} else {
 			System.out.println("Inconnu");
 			doDelete();
