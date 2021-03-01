@@ -29,6 +29,7 @@ public class Send_bid extends OneShotBehaviour {
 		message.clearAllReceiver();
 		message.setSender(myAgent.getAID());
 		myAgent.send(message);
+		
 	}
 
 	public int onEnd() {

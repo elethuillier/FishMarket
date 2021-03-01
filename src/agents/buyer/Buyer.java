@@ -7,6 +7,7 @@ import jade.core.AID;
 import jade.core.Agent;
 import jade.core.behaviours.Behaviour;
 import jade.core.behaviours.FSMBehaviour;
+import jade.domain.FIPAAgentManagement.ServiceDescription;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 import shared.Performatives;
@@ -34,6 +35,10 @@ public class Buyer extends Agent {
 			agent_budget = Double.parseDouble(BuyerApplication.str_agent_budget);
 			// agent_mode = (int) args[2];
 			agent_aid = getAID();
+			ServiceDescription sd = new ServiceDescription();
+			sd.setType("buyer");
+			sd.setName(getLocalName());
+			register(this, sd);
 			addBehaviour(new Subscribe(this));
 		} else {
 			System.out.println("No name specified");
