@@ -49,11 +49,6 @@ public class MarketBehaviour extends CyclicBehaviour {
                             ACLMessage response = new ACLMessage(Performatives.to_propagate);
                             PropagateMessage propagate = new PropagateMessage(auction.hashCode(), auction.getSeller(), auction.getPack());
                             response.setContentObject(propagate);
-
-                            MarketApplication.self.getObservableAuctions().add(
-                                    new AuctionMarketElement(auction.getId(), propagate.getSellerId().getName(), propagate.getPack(), propagate.getPack().getStartPrice())
-                            );
-
                             DFAgentDescription dfd = new DFAgentDescription();
                             DFAgentDescription[] result = DFService.search(myAgent, dfd);
                             System.out.println(result.length + " results" );
@@ -62,6 +57,13 @@ public class MarketBehaviour extends CyclicBehaviour {
                             }
 
                             myAgent.send(response);
+
+                            for(AuctionMarketElement elt : MarketApplication.self.getObservableAuctions()) {
+                                System.out.print(elt.getId() + " | ");
+                                System.out.print(elt.getPack() + " | ");
+                                System.out.print(elt.getPrice() + " | ");
+                                System.out.println(elt.getSeller());
+                            }
                         }
                         break;
                     } catch (UnreadableException | IOException | FIPAException e) {

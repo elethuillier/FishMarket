@@ -7,9 +7,7 @@ import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.UnreadableException;
 import model.AuctionBuyerElement;
-import shared.messages.BidMessage;
 import shared.messages.PropagateMessage;
-import shared.messages.RepBidMessage;
 import shared.messages.SubscribeMessage;
 
 public class Subscribe extends CyclicBehaviour {
@@ -48,12 +46,13 @@ public class Subscribe extends CyclicBehaviour {
 					try {
 						message_sub.setContentObject(sub);
 					} catch (IOException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 					message_sub.clearAllReceiver();
 					message_sub.setSender(myAgent.getAID());
 					message_sub.addReceiver(buyer.market_aid);
+					System.out.println(message_sub.toString());
+					System.out.println(buyer.market_aid);
 					myAgent.send(message_sub);
 					myAgent.addBehaviour(new State_behaviour(buyer, cpt_announce));
 					cpt_announce++;

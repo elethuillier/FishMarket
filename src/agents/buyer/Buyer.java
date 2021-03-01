@@ -1,16 +1,13 @@
 package agents.buyer;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import app.BuyerApplication;
 import jade.core.AID;
 import jade.core.Agent;
-import jade.core.behaviours.Behaviour;
-import jade.core.behaviours.FSMBehaviour;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
-import jade.lang.acl.ACLMessage;
-import jade.lang.acl.MessageTemplate;
-import shared.Performatives;
+import model.AuctionBuyerElement;
 import shared.Utils.ControlMode;
 import shared.messages.AnnounceMessage;
 
@@ -19,10 +16,10 @@ public class Buyer extends Agent {
 	public double agent_budget;
 	public ControlMode agent_mode = ControlMode.AUTO;
 	public AID agent_aid;
-	public ArrayList<AnnounceMessage> announces;
-	public ArrayList<model.AuctionBuyerElement> my_auctions;
+	public List<AnnounceMessage> announces;
+	public List<AuctionBuyerElement> my_auctions = new ArrayList<>();
 	public double last_bid = 0;
-	public AID market_aid;  
+	public AID market_aid;
 
 	@Override
 	protected void setup() {

@@ -61,12 +61,12 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button fx:id="subscribe" alignment="CENTER" contentDisplay="CENTER" disable="true" mnemonicParsing="false" prefHeight="26.0" prefWidth="288.0" text="Passer aux enchères !" GridPane.halignment="CENTER">
+                  <Button fx:id="subscribe" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="26.0" prefWidth="288.0" text="Passer aux enchères !" GridPane.halignment="CENTER">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
-                  <Button fx:id="propose" alignment="CENTER" contentDisplay="CENTER" disable="true" mnemonicParsing="false" prefHeight="26.0" prefWidth="284.0" text="Proposer" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                  <Button fx:id="propose" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="26.0" prefWidth="284.0" text="Proposer" GridPane.columnIndex="1" GridPane.halignment="CENTER">
                      <GridPane.margin>
                         <Insets />
                      </GridPane.margin>
