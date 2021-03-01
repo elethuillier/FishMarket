@@ -22,7 +22,7 @@ public class announce extends Behaviour {
 	public static final int ANNONCE = 1;
 	public static final int ATTENTE = 2;
 	public static final int FIN_ANNONCE = 3;
-	public long cooldown = -1;
+	public long cooldown = 0;
 
 	@Override
 	public void action() {
@@ -31,12 +31,11 @@ public class announce extends Behaviour {
 		switch (inProgress) {
 		case ANNONCE:
 
-			
 			if (true) {
 				System.out.println(myAgent.getAID().getName() + " Mise en ligne de l'annonce");
 
 				ACLMessage message = new ACLMessage(shared.Performatives.to_announce);
-				AnnounceMessage annonce = new AnnounceMessage(seller.my_auctionsID.get(0), 50.0);
+				AnnounceMessage annonce = new AnnounceMessage(seller.monAuction.getId(), seller.monAuction.getCurrentPrice());
 				message.addReceiver(seller.destinataire);
 				try {
 					message.setContentObject(annonce);
@@ -70,11 +69,10 @@ public class announce extends Behaviour {
 							BidMessage bid = (BidMessage) serial;
 							// Lire le prix de l'offre ?
 						}
-
 						inProgress = FIN_ANNONCE;
 					}
 				}
-			}else {
+			} else {
 				block();
 			}
 
@@ -84,12 +82,12 @@ public class announce extends Behaviour {
 		}
 
 		// CoolDown dépassé, on renvoie une annonce dans l'enchère avec un prix plus bas
-		// (prix actuel - pas défini par l'user)
-		if (cooldown > 0 && (cooldown + seller.cooldown < Calendar.getInstance().getTimeInMillis())) {
-			System.out.println(myAgent.getAID().getName() + " pas d'offre reçue, prix baisse");
+		if ((cooldown + seller.monAuction.getCooldown() < Calendar.getInstance().getTimeInMillis()) && cooldown > 0) {
+
 			ACLMessage message = new ACLMessage(shared.Performatives.to_announce);
-			AnnounceMessage annonce = new AnnounceMessage(seller.my_auctionsID.get(0), 40.0); // Get price actuel - Pas
-			message.addReceiver(seller.destinataire);																					// décrément
+			AnnounceMessage annonce = new AnnounceMessage(seller.monAuction.getId(), seller.monAuction.getCurrentPrice() - seller.monAuction.getFallingStep()); // Get price actuel - Pas
+			seller.monAuction.setCurrentPrice(seller.monAuction.getCurrentPrice() - seller.monAuction.getFallingStep());
+			message.addReceiver(seller.destinataire);
 			try {
 				message.setContentObject(annonce);
 			} catch (IOException e) {

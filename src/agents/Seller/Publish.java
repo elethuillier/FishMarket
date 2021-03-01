@@ -9,6 +9,7 @@ import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
 import jade.lang.acl.ACLMessage;
 import shared.messages.PublishMessage;
+import shared.model.Auction;
 
 public class Publish extends OneShotBehaviour {
 	public PublishMessage to_publish;
@@ -41,14 +42,19 @@ public class Publish extends OneShotBehaviour {
 
 		ACLMessage messageLoc = new ACLMessage(shared.Performatives.to_publish);
 		messageLoc.addReceiver(seller.destinataire);
+		Auction myAuction = new Auction(to_publish.getPack(), myAgent.getAID(), to_publish.getRisingStep(), to_publish.getFallingStep(), to_publish.getCooldown());
 		try {
 			messageLoc.setContentObject(to_publish);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		messageLoc.setSender(myAgent.getAID());
 		myAgent.send(messageLoc);
+		
+		seller.monAuction = myAuction;
+		seller.monAuction.setCurrentPrice(to_publish.getPack().getStartPrice());
 		myAgent.addBehaviour(new Wait_Propagate(seller));
 	}
 }

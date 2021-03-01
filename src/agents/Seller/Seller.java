@@ -9,21 +9,17 @@ import jade.core.Agent;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
 import shared.Utils;
 import shared.messages.BidMessage;
+import shared.model.Auction;
 import shared.model.Pack;
 
 public class Seller extends Agent {
 	public AID agent_aid;
-
-	public Pack pack = new Pack(400, "Poisson");
-	public double step = 20.0;
-	public double rising_step = step;
-	public double falling_step = step;
-	public int cooldown = 5000;
 	public double Payed = 0;
 	public AID destinataire;
 
-	List<Integer> my_auctionsID = new ArrayList<Integer>();
-	List<BidMessage> my_bids = new ArrayList<BidMessage>();
+	public List<Integer> my_auctionsID = new ArrayList<Integer>();
+	public List<BidMessage> my_bids = new ArrayList<BidMessage>();
+	public Auction monAuction;
 
 	@Override
 	protected void setup() {

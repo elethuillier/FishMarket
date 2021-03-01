@@ -34,7 +34,6 @@ public class Wait_Propagate extends Behaviour {
 						recu = true;
 					}
 				}
-
 				myAgent.addBehaviour(new State_behaviour(seller));
 			}
 		} else {
@@ -44,7 +43,6 @@ public class Wait_Propagate extends Behaviour {
 
 	@Override
 	public boolean done() {
-		// TODO Auto-generated method stub
 		return recu;
 	}
 }
