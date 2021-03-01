@@ -7,6 +7,7 @@ import shared.messages.PayMessage;
 
 public class WaitPay extends Behaviour {
 	private final Seller seller;
+	private boolean recu = false;
 
 	public WaitPay(Seller seller) {
 		this.seller = seller;
@@ -29,6 +30,7 @@ public class WaitPay extends Behaviour {
 					if (serial instanceof PayMessage) {
 						PayMessage pay = (PayMessage) serial;
 						seller.Payed = pay.getPrice();
+						recu = true;
 					}
 				}
 			}
@@ -44,7 +46,6 @@ public class WaitPay extends Behaviour {
 
 	@Override
 	public boolean done() {
-		return true;
+		return recu;
 	}
-
 }

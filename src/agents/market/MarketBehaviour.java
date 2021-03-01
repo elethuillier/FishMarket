@@ -68,6 +68,7 @@ public class MarketBehaviour extends CyclicBehaviour {
                         e.printStackTrace();
                     }
                 case Performatives.to_subscribe:
+                    System.out.println("to_subscribe received");
                     try {
                         Object serial = message.getContentObject();
                         if(serial instanceof SubscribeMessage) {
@@ -80,6 +81,7 @@ public class MarketBehaviour extends CyclicBehaviour {
                         e.printStackTrace();
                     }
                 case Performatives.to_announce:
+                    System.out.println("to_announce received");
                     try {
                         Object serial = message.getContentObject();
                         if(serial instanceof AnnounceMessage) {
@@ -98,6 +100,7 @@ public class MarketBehaviour extends CyclicBehaviour {
                         e.printStackTrace();
                     }
                 case Performatives.to_bid:
+                    System.out.println("to_bid received");
                     try {
                         Object serial = message.getContentObject();
                         if(serial instanceof BidMessage) {
@@ -114,6 +117,7 @@ public class MarketBehaviour extends CyclicBehaviour {
                         e.printStackTrace();
                     }
                 case Performatives.rep_bid:
+                    System.out.println("rep_bid received");
                     try {
                         Object serial = message.getContentObject();
                         if(serial instanceof RepBidMessage) {
@@ -135,6 +139,7 @@ public class MarketBehaviour extends CyclicBehaviour {
                         e.printStackTrace();
                     }
                 case Performatives.to_attribute:
+                    System.out.println("to_attribute received");
                     try {
                         Object serial = message.getContentObject();
                         if (serial instanceof AttributeMessage) {
@@ -148,6 +153,7 @@ public class MarketBehaviour extends CyclicBehaviour {
                         e.printStackTrace();
                     }
                 case Performatives.to_pay:
+                    System.out.println("to_pay received");
                     try {
                         Object serial = message.getContentObject();
                         if (serial instanceof PayMessage) {
@@ -162,6 +168,7 @@ public class MarketBehaviour extends CyclicBehaviour {
                         e.printStackTrace();
                     }
                 case Performatives.to_give:
+                    System.out.println("to_give received");
                     try {
                         Object serial = message.getContentObject();
                         if (serial instanceof GiveMessage) {
@@ -181,6 +188,8 @@ public class MarketBehaviour extends CyclicBehaviour {
                         e.printStackTrace();
                     }
             }
+        } else {
+            block();
         }
     }
 }

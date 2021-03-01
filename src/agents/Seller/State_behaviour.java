@@ -1,5 +1,6 @@
 package agents.Seller;
 
+import app.SellerApplication;
 import jade.core.behaviours.FSMBehaviour;
 
 public class State_behaviour extends FSMBehaviour {
@@ -12,7 +13,11 @@ public class State_behaviour extends FSMBehaviour {
 
 	public State_behaviour(Seller seller) {
 		super();
-		registerFirstState(new announce(seller), "1");
+
+		SellerApplication.controller.setAnnounceListener(() -> {
+			registerFirstState(new announce(seller), "1");
+		});
+
 		registerState(new OneBid(seller), "2");
 		registerState(new SeveralBid(seller), "3");
 		registerState(new AttributePack(seller), "4");

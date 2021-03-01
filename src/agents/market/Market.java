@@ -19,5 +19,6 @@ public class Market extends Agent {
 		sd.setType("market");
 		sd.setName(getLocalName());
 		Utils.register(this, sd);
+		addBehaviour(new MarketBehaviour(this));
 	}
 }
