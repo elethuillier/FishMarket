@@ -26,7 +26,6 @@ public class AttributePack extends OneShotBehaviour {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		message.clearAllReceiver();
 		message.setSender(myAgent.getAID());
 		myAgent.send(message);
 	}

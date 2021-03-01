@@ -46,5 +46,4 @@ public class WaitPay extends Behaviour {
 	public boolean done() {
 		return true;
 	}
-
 }

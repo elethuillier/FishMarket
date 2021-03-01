@@ -48,10 +48,8 @@ public class Publish extends OneShotBehaviour {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		messageLoc.clearAllReceiver();
 		messageLoc.setSender(myAgent.getAID());
 		myAgent.send(messageLoc);
-
 		myAgent.addBehaviour(new Wait_Propagate(seller));
 
 	}

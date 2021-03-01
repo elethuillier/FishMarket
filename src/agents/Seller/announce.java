@@ -44,7 +44,6 @@ public class announce extends Behaviour {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				message.clearAllReceiver();
 				message.setSender(myAgent.getAID());
 				myAgent.send(message);
 				inProgress = ATTENTE;
@@ -97,7 +96,6 @@ public class announce extends Behaviour {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			message.clearAllReceiver();
 			message.setSender(myAgent.getAID());
 			myAgent.send(message);
 		}
