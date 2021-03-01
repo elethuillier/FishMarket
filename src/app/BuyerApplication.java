@@ -21,7 +21,6 @@ import java.util.Optional;
 public class BuyerApplication extends Application {
     public static BuyerApplication self;
     public static String agent_name = "Bob";
-    public static String str_agent_budget = "100";
     public static BuyerController controller;
 
     private final ObservableList<AuctionBuyerElement> observable_auctions = FXCollections.observableArrayList();
@@ -37,9 +36,6 @@ public class BuyerApplication extends Application {
     public static void main(String[] args) {
         if(args.length > 0 && !args[0].isEmpty()) {
         	agent_name = args[0];
-        	if(args.length > 1 && !args[1].isEmpty()) {
-                str_agent_budget = args[1];
-            }
         }
         launch(args);
     }
@@ -59,7 +55,7 @@ public class BuyerApplication extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Boot.main(new String[]{"-container", "-host", "localhost", "-port", EnvConfiguration.default_port, agent_name + str_agent_budget + ":agents.buyer.Buyer()"});
+        Boot.main(new String[]{"-container", "-host", "localhost", "-port", EnvConfiguration.default_port, agent_name + ":agents.buyer.Buyer()"});
     }
 
     public AuctionBuyerElement getAuctionFromId(int id) throws Utils.IdMapException {

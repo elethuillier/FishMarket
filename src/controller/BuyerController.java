@@ -4,8 +4,10 @@ import app.BuyerApplication;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import model.AuctionBuyerElement;
+import shared.Utils;
 import shared.Utils.ControlMode;
 
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 public class BuyerController {
@@ -46,9 +48,20 @@ public class BuyerController {
         auctions.setItems(app.getObservableAuctions());
     }
 
-    public void setModeListener(Consumer<ControlMode> callback) {
-        manual.setOnMouseClicked(event -> callback.accept(ControlMode.MANUAL));
-        auto.setOnMouseClicked(event -> callback.accept(ControlMode.AUTO));
+    public void setModeListener(BiConsumer<ControlMode, Double> callback) {
+        manual.setOnMouseClicked(event -> {
+            String strLimit = limit.getText();
+            if(!strLimit.isEmpty() && Utils.isNumeric(strLimit)) {
+                callback.accept(ControlMode.MANUAL, Double.parseDouble(strLimit));
+            }
+        });
+
+        auto.setOnMouseClicked(event -> {
+            String strLimit = limit.getText();
+            if(!strLimit.isEmpty() && Utils.isNumeric(strLimit)) {
+                callback.accept(ControlMode.AUTO, Double.parseDouble(strLimit));
+            }
+        });
     }
 
     public void setSubscribeListener(Consumer<AuctionBuyerElement> callback) {
