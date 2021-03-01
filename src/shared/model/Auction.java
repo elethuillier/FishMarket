@@ -52,13 +52,20 @@ public class Auction implements Serializable {
 
     public Pack getPack() { return pack; }
 
+    public double getRisingStep() { return rising_step; }
 
+    public double getFallingStep() { return falling_step; }
+
+    public int getCooldown() { return cooldown; }
+
+    public double getCurrentPrice() { return current_price; }
+
+    public boolean isDone() { return done; }
 
     public void setCurrentPrice(double current_price) {
         this.current_price = current_price;
     }
 
-    public double getCurrentPrice() { return current_price; }
 
     public void setDone(boolean done) { this.done = done; }
 
