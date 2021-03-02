@@ -1,5 +1,6 @@
 package agents.Seller;
 
+import app.SellerApplication;
 import jade.core.behaviours.Behaviour;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
@@ -40,5 +41,11 @@ public class WaitPropagateBehaviour extends Behaviour {
 	@Override
 	public boolean done() {
 		return received;
+	}
+
+	@Override
+	public int onEnd() {
+		SellerApplication.controller.getAnnounce().setDisable(false);
+		return super.onEnd();
 	}
 }

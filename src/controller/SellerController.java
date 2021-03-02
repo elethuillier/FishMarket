@@ -55,14 +55,15 @@ public class SellerController {
         this.state_label.setText(state);
     }
 
-    public void setPackLabel(Pack pack) {
-        this.pack_label.setText(pack.getDescription());
+    public void setPackLabel(String pack) {
+        this.pack_label.setText(pack);
     }
 
     public void setCreateListener(Consumer<PublishMessage> callback) {
         button_create.setOnMouseClicked(event -> {
             String[] numeric_inputs = {initial_price.getText(), cooldown.getText(), rising_step.getText(), falling_step.getText()};
             if(!name.getText().isEmpty() && shared.Utils.areNumeric(numeric_inputs)) {
+                button_create.setDisable(true);
                 Pack pack = new Pack(Double.parseDouble(initial_price.getText()), name.getText());
                 PublishMessage message = new PublishMessage(pack,
                         Double.parseDouble(rising_step.getText()),
@@ -78,4 +79,7 @@ public class SellerController {
         announce.setOnMouseClicked(event -> callback.run());
     }
 
+    public Button getAnnounce() {
+        return announce;
+    }
 }

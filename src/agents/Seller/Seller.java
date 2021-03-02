@@ -27,20 +27,24 @@ public class Seller extends Agent {
 		sd.setName(getLocalName());
 		Utils.register(this, sd);
 
+		SellerApplication.controller.setPackLabel("");
+		SellerApplication.controller.setStateLabel(Utils.LabelContent.CREATE);
+
 		System.out.println("L'agent " + getAID().getName() + " est prêt.");
 		Object[] args = getArguments();
 		if (args != null && args.length > 0) {
 			System.out.println("setListener");
 			agent_aid = getAID();
 			SellerApplication.controller.setCreateListener(message -> {
-				System.out.println("click");
 				SequentialBehaviour sequence = new SequentialBehaviour();
 				sequence.addSubBehaviour(new PublishBehaviour(message, this));
 				sequence.addSubBehaviour(new WaitPropagateBehaviour(this));
-				sequence.addSubBehaviour(new AutomataBehaviour(this));
 				addBehaviour(sequence);
 			});
 
+			SellerApplication.controller.setAnnounceListener(() -> {
+				addBehaviour(new AutomataBehaviour(this));
+			});
 		} else {
 			System.out.println("Inconnu");
 			doDelete();
