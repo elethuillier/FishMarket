@@ -98,5 +98,12 @@ public class BuyerController {
 	public Button getManual() {
 		return manual;
 	}
+
+	/**
+	 * @return the info
+	 */
+	public Label getInfo() {
+		return info;
+	}
     
 }

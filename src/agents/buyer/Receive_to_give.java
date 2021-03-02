@@ -16,6 +16,7 @@ public class Receive_to_give extends Behaviour {
 		ACLMessage message = myAgent.receive();
 		if (message != null) {
 			if (message.getPerformative() == shared.Performatives.to_give) {
+				System.out.println("Reception to_give");
 				receive_give = true;
 				Object serial = null;
 				try {

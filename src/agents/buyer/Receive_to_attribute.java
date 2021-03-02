@@ -16,6 +16,7 @@ public class Receive_to_attribute extends Behaviour {
 		ACLMessage message = myAgent.receive();
 		if (message != null) {
 			if (message.getPerformative() == shared.Performatives.to_attribute) {
+				System.out.println("Reception to_attribute");
 				receive_attribute = true;
 				Object serial = null;
 				try {

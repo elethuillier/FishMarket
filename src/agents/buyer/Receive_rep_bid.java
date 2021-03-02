@@ -16,6 +16,7 @@ public class Receive_rep_bid extends Behaviour {
 		ACLMessage message = myAgent.receive();
 		if (message != null) {
 			if (message.getPerformative() == shared.Performatives.rep_bid) {
+				System.out.println("Reception rep_bid");
 				receive_bid = true;
 				Object serial = null;
 				try {

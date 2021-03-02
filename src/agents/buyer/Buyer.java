@@ -27,6 +27,8 @@ public class Buyer extends Agent {
 	@Override
 	protected void setup() {
 		super.setup();
+		javafx.application.Platform
+				.runLater(() -> BuyerApplication.controller.getInfo().setText(shared.Utils.LabelContent.MODE));
 		BuyerApplication.controller.getPropose().setDisable(true);
 		BuyerApplication.controller.getSubscribe().setDisable(true);
 		BuyerApplication.controller.setModeListener((mode, budget) -> {
@@ -43,6 +45,12 @@ public class Buyer extends Agent {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+			if (agent_mode == ControlMode.AUTO)
+				javafx.application.Platform.runLater(
+						() -> BuyerApplication.controller.getInfo().setText(shared.Utils.LabelContent.SUBSCRIBE_AUTO));
+			else
+				javafx.application.Platform.runLater(() -> BuyerApplication.controller.getInfo()
+						.setText(shared.Utils.LabelContent.SUBSCRIBE_MANUAL));
 			message_sub.clearAllReceiver();
 			message_sub.setSender(getAID());
 			message_sub.addReceiver(market_aid);

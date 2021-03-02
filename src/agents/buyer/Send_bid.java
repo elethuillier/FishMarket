@@ -61,12 +61,16 @@ public class Send_bid extends Behaviour {
 
 	@Override
 	public boolean done() {
-		if (buyer.agent_mode.equals(ControlMode.AUTO))
+		if (buyer.agent_mode.equals(ControlMode.AUTO)) {
+			javafx.application.Platform
+					.runLater(() -> BuyerApplication.controller.getInfo().setText(shared.Utils.LabelContent.PROPOSED));
 			return true;
-		else {
-			if (send_bid == true)
+		} else {
+			if (send_bid == true) {
+				javafx.application.Platform.runLater(
+						() -> BuyerApplication.controller.getInfo().setText(shared.Utils.LabelContent.PROPOSED));
 				return true;
-			else
+			} else
 				return false;
 		}
 	}

@@ -26,7 +26,7 @@ public class Receive_announce extends Behaviour {
 		if (message != null) {
 			if (message.getPerformative() == shared.Performatives.to_announce) {
 				if (buyer.agent_mode == shared.Utils.ControlMode.AUTO) {
-					System.out.println("Receive to announce, AUTO");
+					System.out.println("Reception to_announce, mode AUTO");
 					receive_announce = true;
 					Object serial = null;
 					try {
@@ -48,6 +48,7 @@ public class Receive_announce extends Behaviour {
 						}
 					}
 				} else {
+					System.out.println("Reception to_announce, mode MANUEL");
 					receive_announce = true;
 					Object serial = null;
 					try {
