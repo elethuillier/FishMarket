@@ -9,7 +9,11 @@ import jade.lang.acl.MessageTemplate;
 import jade.lang.acl.UnreadableException;
 import model.AuctionSellerElement;
 import shared.Performatives;
+import shared.messages.AttributeMessage;
 import shared.messages.BidMessage;
+import shared.messages.RepBidMessage;
+
+import java.io.IOException;
 
 public class SeveralBidBehaviour extends Behaviour {
 	private static final long serialVersionUID = 1L;
@@ -57,6 +61,12 @@ public class SeveralBidBehaviour extends Behaviour {
 
 	@Override
 	public int onEnd() {
+		ACLMessage message = new ACLMessage(Performatives.rep_bid);
+		RepBidMessage repbid = new RepBidMessage(seller.myAuction.getId(), RepBidMessage.State.NOK);
+		message.addReceiver(seller.market);
+		try { message.setContentObject(repbid); } catch (IOException e) { e.printStackTrace(); }
+		message.setSender(myAgent.getAID());
+		myAgent.send(message);
 		return event;
 	}
 }

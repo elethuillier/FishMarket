@@ -45,7 +45,7 @@ public class AutomataBehaviour extends FSMBehaviour {
 		registerTransition("2", "3", SEVERAL_BID_EVENT, new String[]{"3"});
 		registerTransition("2", "4", ATTRIBUTE_EVENT);
 		registerTransition("3", "3", SEVERAL_BID_EVENT, new String[]{"3"});
-		registerTransition("3", "1", ANNOUNCE_EVENT, new String[]{"1"}); // Attention, appeler repBid Behaviour avant d'aller à l'état 1
+		registerTransition("3", "1", ANNOUNCE_EVENT, new String[]{"1"});
 		registerTransition("4", "5", WAIT_PAY_EVENT);
 		registerTransition("5", "6", GIVE_EVENT);
 	}

@@ -1,6 +1,8 @@
 package shared.messages;
 
-public class RepBidMessage {
+import java.io.Serializable;
+
+public class RepBidMessage implements Serializable {
     private final int auction_id;
     private final State state;
 
