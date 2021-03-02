@@ -17,7 +17,7 @@ public class Receive_announce extends Behaviour {
 		this.buyer = buyer;
 		this.cpt = cpt;
 	}
-	
+
 	// Rajouter le cas ou il ne veut pas bid
 	@Override
 	public void action() {
@@ -46,6 +46,21 @@ public class Receive_announce extends Behaviour {
 							no_bid = true;
 						}
 					}
+				} else {
+					receive_announce = true;
+					Object serial = null;
+					try {
+						serial = message.getContentObject();
+					} catch (UnreadableException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					if (serial != null) {
+						if (serial instanceof AnnounceMessage) {
+							announce = (AnnounceMessage) serial;
+							buyer.announces.add(cpt, announce);
+						}
+					}
 				}
 			}
 		}
@@ -54,19 +69,28 @@ public class Receive_announce extends Behaviour {
 	@Override
 	public boolean done() {
 		// TODO Auto-generated method stub
-		if (bid == true)
-			return true;
-		else if (no_bid == true)
-			return true;
-		else
-			return false;
+		if (buyer.agent_mode == shared.Utils.ControlMode.AUTO) {
+			if (bid == true)
+				return true;
+			else if (no_bid == true)
+				return true;
+			else
+				return false;
+		} else {
+			if (receive_announce == true)
+				return true;
+			else
+				return false;
+		}
 	}
 
 	public int onEnd() {
-		if (bid)
+		if (buyer.agent_mode == shared.Utils.ControlMode.AUTO) {
+			if (bid)
+				return 2;
+			else
+				return 8;
+		} else
 			return 2;
-		else
-			return 8;
-	}
-
+	}		
 }

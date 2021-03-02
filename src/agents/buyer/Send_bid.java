@@ -2,13 +2,17 @@ package agents.buyer;
 
 import java.io.IOException;
 
+import app.BuyerApplication;
+import jade.core.behaviours.Behaviour;
 import jade.core.behaviours.OneShotBehaviour;
 import jade.lang.acl.ACLMessage;
+import shared.Utils.ControlMode;
 import shared.messages.BidMessage;
 
-public class Send_bid extends OneShotBehaviour {
+public class Send_bid extends Behaviour {
 	private final Buyer buyer;
 	private int cpt;
+	private boolean send_bid = false;
 
 	public Send_bid(Buyer buyer, int cpt) {
 		this.buyer = buyer;
@@ -18,23 +22,53 @@ public class Send_bid extends OneShotBehaviour {
 	@Override
 	public void action() {
 		// TODO Auto-generated method stub
-		ACLMessage message = new ACLMessage(shared.Performatives.to_bid);
-		BidMessage bid = new BidMessage(buyer.announces.get(cpt).getAuctionId(), buyer.agent_aid);
-		try {
-			message.setContentObject(bid);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if (buyer.agent_mode.equals(ControlMode.AUTO)) {
+			ACLMessage message = new ACLMessage(shared.Performatives.to_bid);
+			BidMessage bid = new BidMessage(buyer.announces.get(cpt).getAuctionId(), buyer.agent_aid);
+			try {
+				message.setContentObject(bid);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			message.clearAllReceiver();
+			message.setSender(myAgent.getAID());
+			message.addReceiver(buyer.market_aid);
+			myAgent.send(message);
+		} else {
+			BuyerApplication.controller.setBidListener(auction -> {
+				ACLMessage message = new ACLMessage(shared.Performatives.to_bid);
+				BidMessage bid = new BidMessage(buyer.announces.get(cpt).getAuctionId(), buyer.agent_aid);
+				try {
+					message.setContentObject(bid);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				message.clearAllReceiver();
+				message.setSender(myAgent.getAID());
+				message.addReceiver(buyer.market_aid);
+				myAgent.send(message);
+				send_bid = true;
+				System.out.println("Je bid!");
+			});
 		}
-		message.clearAllReceiver();
-		message.setSender(myAgent.getAID());
-		message.addReceiver(buyer.market_aid);
-		myAgent.send(message);
-		
 	}
 
 	public int onEnd() {
 		return 3;
+	}
+
+	@Override
+	public boolean done() {
+		if (buyer.agent_mode.equals(ControlMode.AUTO))
+			return true;
+		else {
+			if (send_bid == true)
+				return true;
+			else
+				return false;
+		}
 	}
 
 }

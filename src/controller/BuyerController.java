@@ -52,6 +52,9 @@ public class BuyerController {
         manual.setOnMouseClicked(event -> {
             String strLimit = limit.getText();
             if(!strLimit.isEmpty() && Utils.isNumeric(strLimit)) {
+            	manual.setDisable(true);
+            	auto.setDisable(false);
+            	propose.setDisable(false);
                 callback.accept(ControlMode.MANUAL, Double.parseDouble(strLimit));
             }
         });
@@ -59,6 +62,9 @@ public class BuyerController {
         auto.setOnMouseClicked(event -> {
             String strLimit = limit.getText();
             if(!strLimit.isEmpty() && Utils.isNumeric(strLimit)) {
+            	auto.setDisable(true);
+            	manual.setDisable(false);
+            	propose.setDisable(true);
                 callback.accept(ControlMode.AUTO, Double.parseDouble(strLimit));
             }
         });

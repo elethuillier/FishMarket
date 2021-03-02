@@ -25,12 +25,9 @@ public class Buyer extends Agent {
 		super.setup();
 		BuyerApplication.controller.getPropose().setDisable(true);
 		BuyerApplication.controller.getSubscribe().setDisable(true);
-		BuyerApplication.controller.getManual().setDisable(true);
 		BuyerApplication.controller.setModeListener((mode, budget) -> {
 			agent_mode = mode;
 			agent_budget = budget;
-			if (agent_mode.equals(ControlMode.MANUAL))
-				BuyerApplication.controller.getPropose().setDisable(false);
 			BuyerApplication.controller.getSubscribe().setDisable(false);
 		});
 		System.out.println("Agent: " + getAID().getName() + " is ready.");

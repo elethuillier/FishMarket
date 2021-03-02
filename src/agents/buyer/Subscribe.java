@@ -51,8 +51,6 @@ public class Subscribe extends CyclicBehaviour {
 					message_sub.clearAllReceiver();
 					message_sub.setSender(myAgent.getAID());
 					message_sub.addReceiver(buyer.market_aid);
-					System.out.println(message_sub.toString());
-					System.out.println(buyer.market_aid);
 					myAgent.send(message_sub);
 					myAgent.addBehaviour(new State_behaviour(buyer, cpt_announce));
 					cpt_announce++;
