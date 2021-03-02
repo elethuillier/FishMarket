@@ -1,6 +1,5 @@
 package agents.Seller;
 
-import app.SellerApplication;
 import jade.core.behaviours.Behaviour;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;

@@ -47,7 +47,7 @@ public class MarketBehaviour extends CyclicBehaviour {
                             MarketApplication.self.getObservableAuctions().add(new AuctionMarketElement(auction.getId(), auction.getSeller().getName(), auction.getPack(), auction.getCurrentPrice()));
 
                             ACLMessage response = new ACLMessage(Performatives.to_propagate);
-                            PropagateMessage propagate = new PropagateMessage(auction.hashCode(), auction.getSeller(), auction.getPack());
+                            PropagateMessage propagate = new PropagateMessage(auction.getId(), auction.getSeller(), auction.getPack());
                             response.setContentObject(propagate);
                             DFAgentDescription dfd = new DFAgentDescription();
                             DFAgentDescription[] result = DFService.search(myAgent, dfd);
