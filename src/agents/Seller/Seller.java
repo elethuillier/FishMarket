@@ -6,18 +6,17 @@ import java.util.List;
 import app.SellerApplication;
 import jade.core.AID;
 import jade.core.Agent;
+import jade.core.behaviours.SequentialBehaviour;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
 import shared.Utils;
 import shared.messages.BidMessage;
 import shared.model.Auction;
-import shared.model.Pack;
 
 public class Seller extends Agent {
 	public AID agent_aid;
-	public double Payed = 0;
-	public AID destinataire;
-	public List<BidMessage> my_bids = new ArrayList<BidMessage>();
-	public Auction monAuction;
+	public AID market;
+	public List<BidMessage> my_bids = new ArrayList<>();
+	public Auction myAuction;
 
 	@Override
 	protected void setup() {
@@ -31,9 +30,15 @@ public class Seller extends Agent {
 		System.out.println("L'agent " + getAID().getName() + " est prêt.");
 		Object[] args = getArguments();
 		if (args != null && args.length > 0) {
+			System.out.println("setListener");
 			agent_aid = getAID();
 			SellerApplication.controller.setCreateListener(message -> {
-				addBehaviour(new Publish(message, this));
+				System.out.println("click");
+				SequentialBehaviour sequence = new SequentialBehaviour();
+				sequence.addSubBehaviour(new PublishBehaviour(message, this));
+				sequence.addSubBehaviour(new WaitPropagateBehaviour(this));
+				sequence.addSubBehaviour(new AutomataBehaviour(this));
+				addBehaviour(sequence);
 			});
 
 		} else {

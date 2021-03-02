@@ -60,4 +60,21 @@ public class Utils {
             super(message);
         }
     }
+
+    public static class StopWatch {
+        private long cooldown;
+        private long start_time;
+        public StopWatch(long cooldown) {
+            this.cooldown = cooldown * 1000;
+        }
+        public void start() {
+            start_time = System.currentTimeMillis();
+        }
+        public boolean done() {
+            return (System.currentTimeMillis() - start_time > cooldown);
+        }
+        public long delta() {
+            return cooldown - (System.currentTimeMillis() - start_time);
+        }
+    }
 }
