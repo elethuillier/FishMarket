@@ -41,6 +41,7 @@ public class Receive_announce extends Behaviour {
 							buyer.announces.add(cpt, announce);
 						}
 						if (buyer.agent_budget > announce.getPrice()) {
+							System.out.println("J'ai assez de sous ! Je me prépare à bid");
 							bid = true;
 							buyer.last_bid = announce.getPrice();
 						} else {

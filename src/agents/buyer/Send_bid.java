@@ -35,6 +35,7 @@ public class Send_bid extends Behaviour {
 			message.setSender(myAgent.getAID());
 			message.addReceiver(buyer.market_aid);
 			myAgent.send(message);
+			System.out.println("Je bid!");
 		} else {
 			BuyerApplication.controller.setBidListener(auction -> {
 				ACLMessage message = new ACLMessage(shared.Performatives.to_bid);
