@@ -44,7 +44,7 @@ public class SellerApplication extends Application {
     public void start(Stage primaryStage) {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("../view/seller.fxml"));
-        addTestData();
+        // addTestData();
         try {
             root = loader.load();
             primaryStage.setScene(new Scene(root));

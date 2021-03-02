@@ -3,9 +3,12 @@ package agents.Seller.fsm;
 import java.io.IOException;
 
 import agents.Seller.Seller;
+import app.SellerApplication;
 import jade.core.behaviours.OneShotBehaviour;
 import jade.lang.acl.ACLMessage;
+import javafx.application.Platform;
 import shared.Performatives;
+import shared.Utils;
 import shared.messages.GiveMessage;
 
 public class GiveBehaviour extends OneShotBehaviour {
@@ -19,6 +22,10 @@ public class GiveBehaviour extends OneShotBehaviour {
 	public void onStart() {
 		super.onStart();
 		System.out.println("GiveBehaviour");
+		Platform.runLater(() -> {
+			SellerApplication.controller.setPackLabel(seller.myAuction.getPack().getDescription() + " : ");
+			SellerApplication.controller.setStateLabel(Utils.LabelContent.PAYED);
+		});
 	}
 
 	@Override

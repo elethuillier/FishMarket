@@ -42,7 +42,7 @@ public class MarketApplication extends Application {
     public void start(Stage primaryStage) {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("../view/market.fxml"));
-        addTestData();
+        // addTestData();
         try {
             root = loader.load();
             primaryStage.setScene(new Scene(root));

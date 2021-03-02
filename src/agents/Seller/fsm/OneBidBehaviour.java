@@ -7,8 +7,10 @@ import jade.core.behaviours.Behaviour;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 import jade.lang.acl.UnreadableException;
+import javafx.application.Platform;
 import model.AuctionSellerElement;
 import shared.Performatives;
+import shared.Utils;
 import shared.messages.BidMessage;
 import shared.messages.RepBidMessage;
 
@@ -28,6 +30,10 @@ public class OneBidBehaviour extends Behaviour {
 	public void onStart() {
 		super.onStart();
 		System.out.println("OneBidBehaviour");
+		Platform.runLater(() -> {
+			SellerApplication.controller.setPackLabel(seller.myAuction.getPack().getDescription() + " : ");
+			SellerApplication.controller.setStateLabel(Utils.LabelContent.ONE_PROPOSITION);
+		});
 		event = AutomataBehaviour.NO_EVENT;
 		AutomataBehaviour.watch.start();
 	}

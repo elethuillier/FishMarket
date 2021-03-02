@@ -9,8 +9,10 @@ import jade.core.behaviours.Behaviour;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 import jade.lang.acl.UnreadableException;
+import javafx.application.Platform;
 import model.AuctionSellerElement;
 import shared.Performatives;
+import shared.Utils;
 import shared.messages.AnnounceMessage;
 import shared.messages.BidMessage;
 import shared.Utils.StopWatch;
@@ -31,6 +33,10 @@ public class AnnounceBehaviour extends Behaviour {
 	public void onStart() {
 		super.onStart();
 		System.out.println("AnnounceBehaviour");
+		Platform.runLater(() -> {
+			SellerApplication.controller.setPackLabel(seller.myAuction.getPack().getDescription() + " : ");
+			SellerApplication.controller.setStateLabel(Utils.LabelContent.WAITING_PROPOSITION);
+		});
 		event = AutomataBehaviour.NO_EVENT;
 		seller.myAuction.getOfferers().empty();
 		watch = new StopWatch(seller.myAuction.getCooldown());

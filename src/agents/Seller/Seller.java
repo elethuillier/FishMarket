@@ -8,6 +8,7 @@ import jade.core.AID;
 import jade.core.Agent;
 import jade.core.behaviours.SequentialBehaviour;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
+import javafx.application.Platform;
 import shared.Utils;
 import shared.messages.BidMessage;
 import shared.model.Auction;
@@ -15,7 +16,6 @@ import shared.model.Auction;
 public class Seller extends Agent {
 	public AID agent_aid;
 	public AID market;
-	public List<BidMessage> my_bids = new ArrayList<>();
 	public Auction myAuction;
 
 	@Override
@@ -27,8 +27,10 @@ public class Seller extends Agent {
 		sd.setName(getLocalName());
 		Utils.register(this, sd);
 
-		SellerApplication.controller.setPackLabel("");
-		SellerApplication.controller.setStateLabel(Utils.LabelContent.CREATE);
+		Platform.runLater(() -> {
+			SellerApplication.controller.setPackLabel("");
+			SellerApplication.controller.setStateLabel(Utils.LabelContent.CREATE);
+		});
 
 		System.out.println("L'agent " + getAID().getName() + " est prêt.");
 		Object[] args = getArguments();
