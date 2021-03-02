@@ -8,3 +8,5 @@ start "2" java -Dfile.encoding=UTF-8 -classpath "../../out/production/FishMarket
 start "3" java -Dfile.encoding=UTF-8 -classpath "../../out/production/FishMarket;../../lib/jade.jar" app.BuyerApplication BuyerAgent1
 # Start Buyer Application 2nd agent
 start "3" java -Dfile.encoding=UTF-8 -classpath "../../out/production/FishMarket;../../lib/jade.jar" app.BuyerApplication BuyerAgent2
+# Start Buyer Application 3rd agent
+start "3" java -Dfile.encoding=UTF-8 -classpath "../../out/production/FishMarket;../../lib/jade.jar" app.BuyerApplication BuyerAgent3

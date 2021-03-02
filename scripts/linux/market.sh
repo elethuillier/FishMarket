@@ -1,1 +1,1 @@
-java -Dfile.encoding=UTF-8 -classpath "../../out/production/FishMarket;../../lib/jade.jar" app.MarketApplication JmenFish
+java -Dfile.encoding=UTF-8 -classpath ../../out/production/FishMarket:../../lib/jade.jar app.MarketApplication MarketAgent

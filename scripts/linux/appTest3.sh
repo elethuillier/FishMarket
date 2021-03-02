@@ -7,4 +7,6 @@ java -Dfile.encoding=UTF-8 -classpath ../../out/production/FishMarket:../../lib/
 # Start Buyer Application 1er agent
 java -Dfile.encoding=UTF-8 -classpath ../../out/production/FishMarket:../../lib/jade.jar app.BuyerApplication BuyerAgent1 &
 # Start Buyer Application 2nd agent
-java -Dfile.encoding=UTF-8 -classpath ../../out/production/FishMarket:../../lib/jade.jar app.BuyerApplication BuyerAgent2
+java -Dfile.encoding=UTF-8 -classpath ../../out/production/FishMarket:../../lib/jade.jar app.BuyerApplication BuyerAgent2 &
+# Start Buyer Application 3rd agent
+java -Dfile.encoding=UTF-8 -classpath ../../out/production/FishMarket:../../lib/jade.jar app.BuyerApplication BuyerAgent3
