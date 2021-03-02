@@ -13,7 +13,6 @@ import shared.messages.SubscribeMessage;
 public class Subscribe extends CyclicBehaviour {
 	private final Buyer buyer;
 	public PropagateMessage to_propagate;
-	public int cpt_announce = 0;
 
 	public Subscribe(Buyer buyer) {
 		this.buyer = buyer;
@@ -39,22 +38,6 @@ public class Subscribe extends CyclicBehaviour {
 						BuyerApplication.self.getObservableAuctions().add(new AuctionBuyerElement(to_propagate.getAuctionId(), to_propagate.getSellerId().getLocalName(), to_propagate.getPack(), to_propagate.getPack().getStartPrice()));
 					}
 				}
-				final ACLMessage message_sub = new ACLMessage(shared.Performatives.to_subscribe);
-				BuyerApplication.controller.setSubscribeListener(auction -> {
-					buyer.my_auctions.add(auction);
-					SubscribeMessage sub = new SubscribeMessage(auction.getId());
-					try {
-						message_sub.setContentObject(sub);
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-					message_sub.clearAllReceiver();
-					message_sub.setSender(myAgent.getAID());
-					message_sub.addReceiver(buyer.market_aid);
-					myAgent.send(message_sub);
-					myAgent.addBehaviour(new State_behaviour(buyer, cpt_announce));
-					cpt_announce++;
-				});
 			}
 		}
 	}
