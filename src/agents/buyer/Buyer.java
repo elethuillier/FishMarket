@@ -12,7 +12,6 @@ import shared.Utils.ControlMode;
 import shared.messages.AnnounceMessage;
 
 public class Buyer extends Agent {
-	private String agent_name;
 	public double agent_budget;
 	public ControlMode agent_mode = ControlMode.AUTO;
 	public AID agent_aid;
@@ -24,13 +23,20 @@ public class Buyer extends Agent {
 	@Override
 	protected void setup() {
 		super.setup();
-		BuyerApplication.controller.setModeListener((mode, budget) -> {agent_mode = mode;
-		agent_budget = budget;});
+		BuyerApplication.controller.getPropose().setDisable(true);
+		BuyerApplication.controller.getSubscribe().setDisable(true);
+		BuyerApplication.controller.getManual().setDisable(true);
+		BuyerApplication.controller.setModeListener((mode, budget) -> {
+			agent_mode = mode;
+			agent_budget = budget;
+			if (agent_mode.equals(ControlMode.MANUAL))
+				BuyerApplication.controller.getPropose().setDisable(false);
+			BuyerApplication.controller.getSubscribe().setDisable(false);
+		});
 		System.out.println("Agent: " + getAID().getName() + " is ready.");
 		// Get the name of the agent as a start-up argument
 		Object[] args = getArguments();
 		if (args != null && args.length > 0) {
-			agent_name = BuyerApplication.agent_name;
 			agent_aid = getAID();
 			ServiceDescription sd = new ServiceDescription();
 			sd.setType("buyer");

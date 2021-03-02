@@ -71,4 +71,26 @@ public class BuyerController {
     public void setBidListener(Consumer<AuctionBuyerElement> callback) {
         propose.setOnMouseClicked(event -> callback.accept(auctions.getSelectionModel().getSelectedItem()));
     }
+
+	/**
+	 * @return the subscribe
+	 */
+	public Button getSubscribe() {
+		return subscribe;
+	}
+
+	/**
+	 * @return the propose
+	 */
+	public Button getPropose() {
+		return propose;
+	}
+
+	/**
+	 * @return the manual
+	 */
+	public Button getManual() {
+		return manual;
+	}
+    
 }
